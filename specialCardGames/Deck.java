@@ -1,6 +1,6 @@
 package specialCardGames;
 
-/******************************************************************************
+/**********************************************************************
  *  @author Jarod Collier, Maz Ashgar, Josh Lowell
  *  @version 9/28/2018
  *
@@ -12,7 +12,7 @@ package specialCardGames;
  *  ...
  *  8 of Hearts
  *
- ******************************************************************************/
+ *********************************************************************/
 
 public class Deck {
 	
@@ -20,10 +20,22 @@ public class Deck {
 	
 	private int size, index;
 	
-	/**
-	 * Creates a deck with suits and ranks of all 52 cards. Deck is shuffled
-	 * upon creation
-	 */
+	public static void main(String[] args) {
+		Deck d = new Deck();
+		System.out.println(d.topCardValue());
+	
+		d.nextCard();
+		System.out.println(d.topCardValue());
+		d.nextCard();
+		System.out.println(d.topCardValue());
+
+	}
+	
+	
+	/******************************************************************
+	 * Creates a deck with suits and ranks of all 52 cards. Deck is 
+	 * shuffled upon creation
+	 *****************************************************************/
 	public Deck() {
 		
 		 String[] SUITS = {
@@ -40,16 +52,34 @@ public class Deck {
 		        deck = new String[size];
 		        for (int i = 0; i < RANKS.length; i++) {
 		            for (int j = 0; j < SUITS.length; j++) {
-		                deck[SUITS.length*i + j] = RANKS[i] + " of " + SUITS[j];
-		            }
+		                deck[SUITS.length*i + j] = RANKS[i] + " of "
+		            + SUITS[j];
+		                }
 		        }   
 		        index = 0;
 		        shuffle();   
-	}  
-    
-	/**
+	} 
+	
+
+	/******************************************************************
+	 * @return the index
+	 *****************************************************************/
+	public int getIndex() {
+		return index;
+	}
+
+
+	/******************************************************************
+	 * @param index the index to set
+	 *****************************************************************/
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+
+	/******************************************************************
 	 * Shuffles the deck
-	 */
+	 *****************************************************************/
     public void shuffle() {
     	
     	// shuffle
@@ -61,23 +91,51 @@ public class Deck {
         }
     }
     
-    /**
+    /******************************************************************
      * Looks at the first card of the deck
-     */
+     *****************************************************************/
     public String showTopCard() {	
     	return deck[index];	
     }
     
-    /**
+    /******************************************************************
+     * Looks at the top card of the deck and finds its integer
+     * equivalent number.
+     * @return int value of the card on the top of the deck
+     *****************************************************************/
+    public int topCardValue() {
+    	
+    	int cardValue;
+    	
+    	String[] temp = showTopCard().split(" ");
+    	
+    	// Checks for face cards
+    	if(temp[0].equals("King")) 
+    		cardValue = 13;
+    	else if(temp[0].equals("Queen")) 
+    		cardValue = 12;
+    	else if(temp[0].equals("Jack")) 
+    		cardValue = 11;
+    	else if(temp[0].equals("Ace")) 
+    		cardValue = 1;
+    	
+    	// Checks value of number cards
+    	else 
+    		cardValue = Integer.parseInt(temp[0]);
+    	 	
+    	return cardValue;	
+    }
+    
+    /******************************************************************
      * Discards the top card
-     */
+     *****************************************************************/
     public void nextCard() {
     	index++;
     }
     
-    /**
+    /******************************************************************
      * Prints the deck
-     */
+     *****************************************************************/
     public void printDeck() {
     	
     	// print shuffled deck
