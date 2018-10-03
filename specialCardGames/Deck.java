@@ -1,5 +1,8 @@
 package specialCardGames;
 
+import java.util.Random;
+import java.util.*;
+
 /**********************************************************************
  *  @author Jarod Collier, Maz Ashgar, Josh Lowell
  *  @version 9/28/2018
@@ -11,136 +14,194 @@ package specialCardGames;
  *  5 of Diamonds
  *  ...
  *  8 of Hearts
+ *  
+ *  Order of suits is Black-Red-Black-Red. Hence the order is:
+ *  Spades, Hearts, Clubs, and Diamonds
  *
  *********************************************************************/
 
 public class Deck {
+
+	private int[][] deck;
+
+	private ArrayList<Integer> shuffled;
 	
-	private String[] deck;
+	private Random randomSuitGen;
 	
-	private int size, index;
+	private Random randomValueGen;
 	
+	private int randomSuit;
+	
+	private int randomValue;
+
+
+	private final int SUITS = 4;
+
+	private final int VALUES = 13;
+
 	public static void main(String[] args) {
 		Deck d = new Deck();
-		System.out.println(d.topCardValue());
-	
-		d.nextCard();
-		System.out.println(d.topCardValue());
-		d.nextCard();
-		System.out.println(d.topCardValue());
+		d.printDeck();
+		System.out.println(d.chooseSuit());
+		System.out.println(d.blackOrRed(d.chooseSuit()));
+		System.out.println(d.chooseValue());
 
 	}
-	
-	
+
+
 	/******************************************************************
 	 * Creates a deck with suits and ranks of all 52 cards. Deck is 
 	 * shuffled upon creation
 	 *****************************************************************/
 	public Deck() {
+
+		deck = new int[VALUES][SUITS];
+		shuffled = new ArrayList<Integer>();
+
+		// Add values into the deck
+		for (int value = 0; value < VALUES; value++) {
+			for (int suit = 0; suit < SUITS; suit++) {	
+				deck[value][suit] = value + 2;		
+			}
+		}
+
+		// Add possible values to be shuffled
+		for (int shuffle = 0; shuffle < VALUES; shuffle++)
+			shuffled.add(shuffle + 2);
 		
-		 String[] SUITS = {
-		            "Clubs", "Diamonds", "Hearts", "Spades"
-		        };
-
-		        String[] RANKS = {
-		            "2", "3", "4", "5", "6", "7", "8", "9", "10",
-		            "Jack", "Queen", "King", "Ace"
-		        };
-		        
-		        // initialize deck
-		        size = SUITS.length * RANKS.length;
-		        deck = new String[size];
-		        for (int i = 0; i < RANKS.length; i++) {
-		            for (int j = 0; j < SUITS.length; j++) {
-		                deck[SUITS.length*i + j] = RANKS[i] + " of "
-		            + SUITS[j];
-		                }
-		        }   
-		        index = 0;
-		        shuffle();   
+		
+		shuffle(); 
+		
+		randomSuitGen = new Random();
+		randomValueGen = new Random();
+		
+		randomSuit = randomSuitGen.nextInt(SUITS);
+		randomValue = randomValueGen.nextInt(VALUES) + 2;
 	} 
-	
-
-	/******************************************************************
-	 * @return the index
-	 *****************************************************************/
-	public int getIndex() {
-		return index;
-	}
-
-
-	/******************************************************************
-	 * @param index the index to set
-	 *****************************************************************/
-	public void setIndex(int index) {
-		this.index = index;
-	}
 
 
 	/******************************************************************
 	 * Shuffles the deck
 	 *****************************************************************/
-    public void shuffle() {
-    	
-    	// shuffle
-        for (int i = 0; i < size; i++) {
-            int r = i + (int) (Math.random() * (size-i));
-            String temp = deck[r];
-            deck[r] = deck[i];
-            deck[i] = temp;
-        }
-    }
-    
-    /******************************************************************
-     * Looks at the first card of the deck
-     *****************************************************************/
-    public String showTopCard() {	
-    	return deck[index];	
-    }
-    
-    /******************************************************************
-     * Looks at the top card of the deck and finds its integer
-     * equivalent number.
-     * @return int value of the card on the top of the deck
-     *****************************************************************/
-    public int topCardValue() {
-    	
-    	int cardValue;
-    	
-    	String[] temp = showTopCard().split(" ");
-    	
-    	// Checks for face cards
-    	if(temp[0].equals("King")) 
-    		cardValue = 13;
-    	else if(temp[0].equals("Queen")) 
-    		cardValue = 12;
-    	else if(temp[0].equals("Jack")) 
-    		cardValue = 11;
-    	else if(temp[0].equals("Ace")) 
-    		cardValue = 1;
-    	
-    	// Checks value of number cards
-    	else 
-    		cardValue = Integer.parseInt(temp[0]);
-    	 	
-    	return cardValue;	
-    }
-    
-    /******************************************************************
-     * Discards the top card
-     *****************************************************************/
-    public void nextCard() {
-    	index++;
-    }
-    
-    /******************************************************************
-     * Prints the deck
-     *****************************************************************/
-    public void printDeck() {
-    	
-    	// print shuffled deck
-        for (int i = 0; i < size; i++) 
-            System.out.println(deck[i]);
-    }
+	public void shuffle() {
+
+		Collections.shuffle(shuffled);
+
+		for (int suit = 0; suit < SUITS; suit++) {	
+			for (int value = 0; value < VALUES; value++) {
+					deck[value][suit] = shuffled.get(value);
+			}
+			Collections.shuffle(shuffled);
+		}
+	}
+	
+	/******************************************************************
+	 * Randomly chooses a value from the deck
+	 * @return int value 2-14 that represents the value of each card.
+	 * 11 is Jack, 12 is Queen, 13 is King, and 14 is Ace. 
+	 *****************************************************************/
+	public int chooseValue() {
+		
+		// Makes sure that there is a playable value in the suit
+		int count = 0;
+		for (int suit = 0; suit < SUITS; suit++) {
+			if (deck[randomValue][suit] == 0) 
+				count++;	
+		}
+		
+		// If no playable cards, randomly pick new value and try again
+		if (count == SUITS) {
+			randomValue = randomValueGen.nextInt(VALUES);
+			return chooseValue();
+		}
+		else {
+			return randomValue;
+		}
+		
+	}
+	
+	
+	/******************************************************************
+	 * Randomly chooses a suit from the deck
+	 * @return int value 0-3 that represents the suit. 0 is Spades, 1
+	 * is Hearts, 2 is Clubs, and 3 is Diamonds
+	 *****************************************************************/
+	public int chooseSuit() {
+		
+		// Makes sure that there is a playable card in the suit
+		int count = 0;
+		for (int val = 0; val < VALUES; val++) {
+			if (deck[val][randomSuit] == 0) 
+				count++;	
+		}
+		
+		// If no playable cards, randomly pick new suit and try again
+		if (count == VALUES) {
+			randomSuit = randomSuitGen.nextInt(SUITS);
+			return chooseSuit();
+		}
+		else {
+			return randomSuit;
+		}
+		
+	}
+	
+	/******************************************************************
+	 * Checks whether the suit picked is black or red.
+	 * @param suit - int from 0-3 that represents the suit chosen
+	 * @return int value of 0 or 1. 0 if black, 1 if red.
+	 *****************************************************************/
+	public int blackOrRed(int suit) {
+		if (chooseSuit() == 0 || chooseSuit() == 2)
+			return 0;
+		else
+			return 1;
+	}
+	
+	
+	
+	/******************************************************************
+	 * Sets a card to be 0
+	 * @param row - the row of the deck array 
+	 * @param col - the column of the deck array
+	 *****************************************************************/
+	public void usedCard(int value, int suit) {
+		deck[value][suit] = 0;	
+	}
+	
+	/******************************************************************
+	 * Checks if the card has been used or not. If it has been used
+	 * then it will be 0 and then this method will return true
+	 * @param row - the row of the deck array
+	 * @param col - the column of the deck array
+	 * @return true or false whether a card has been used
+	 *****************************************************************/
+	public boolean checkUsedCard(int value, int suit) {
+		if (deck[value][suit] == 0)
+			return true;
+		else
+			return false;
+	}
+
+
+	/******************************************************************
+	 * Prints the deck
+	 *****************************************************************/
+	public void printDeck() {
+
+		// Used to make the console look like a table
+		int n = 0;
+
+		// print shuffled deck
+		for (int suit = 0; suit < SUITS; suit++) {	
+			for (int value = 0; value < VALUES; value++) {
+				System.out.print("" + deck[value][suit] + " ");
+				n++;
+
+				if (n % 13 == 0)
+					System.out.println("");
+			}
+		}
+	}
 
 }
