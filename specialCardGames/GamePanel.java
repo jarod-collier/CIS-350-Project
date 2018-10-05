@@ -9,16 +9,25 @@ import java.io.IOException;
 public class GamePanel extends JPanel {
     private Image backGround = null;
 
+    /******************************************************************
+     * default Constructor for the game panel.
+     *****************************************************************/
     public GamePanel()
     {
         JPanel superPanel = new JPanel();
         superPanel.setLayout(new GridLayout());
         add(superPanel, "Center");
 
+        //get the image from the directory
         changeImage();
-        setPreferredSize(new Dimension(1020, 570));
+        setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
+    /******************************************************************
+     * Overriding the paintComponent method from the Component Class
+     * to set the wallpaper of the game.
+     * @param g the Graphics object to protect
+     *****************************************************************/
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -26,16 +35,23 @@ public class GamePanel extends JPanel {
         g2.drawImage(this.backGround, 0, 0, null);
     }
 
+    /******************************************************************
+     * This method reads the background image from the directory
+     * before it displays it on the panel.
+     * @throws IOException if the image can't be loaded
+     *****************************************************************/
     public void changeImage()
     {
         try
         {
-            this.backGround = ImageIO.read(getClass().getResource("bG.jpg"));
+            this.backGround = ImageIO.read(getClass().getResource(
+                    "bG.jpg"));
             repaint();
         }
         catch (IOException e)
         {
-            JOptionPane.showMessageDialog(this, "Couldn't load background");
+            JOptionPane.showMessageDialog(this,
+                    "Couldn't load background");
         }
     }
 }
