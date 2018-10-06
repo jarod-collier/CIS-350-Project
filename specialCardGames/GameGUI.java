@@ -8,8 +8,7 @@ import java.awt.Container;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-public class GameGUI
-		extends JComponent
+public class GameGUI extends JComponent
 {
 	public static void main(String[] args)
 	{
