@@ -59,6 +59,8 @@ public class Deck {
 			d.printDeck();
 		}
 		System.out.println(d.lowerOrHigher());
+		System.out.println(d.insideOrOutside());
+		System.out.println(d.guessSuit(2));
 	}
 
 
@@ -301,17 +303,43 @@ public class Deck {
 		// Checks if at least 3 cards have been chosen to compare
 		if (chosenCards.size() > 2) {
 
+			// checks if recent card's value is inside others
 			if (third > first && third < second)
 				return -1;
+			
+			// checks if recent card's value is outside others
 			else if ( (third > first && third > second) ||
 					(third < first && third < second))
 				return 1;
+			
+			// if those don't work, recent card equals one of the cards
 			else
 				return 0;
 		}
 		else
 			throw new IllegalArgumentException("Can't compare cards");
 
+	}
+	
+	/******************************************************************
+	 * Checks if the user's guess is the same as the card
+	 * @param guessSuit - the value of the suit the user guesses
+	 * @return true or false whether the user is right or wrong
+	 *****************************************************************/
+	public boolean guessSuit(int guessSuit) {
+		
+		// Makes sure there is a card to guess the suit from
+		if (chosenCards.size() >= 1) {
+			
+			// Checks if chosen card's suit is the same as guessSuit
+			if (getRandomSuit() == guessSuit)
+				return true;
+			else 
+				return false;		
+		}
+		else
+			throw new IllegalArgumentException("Must pick a card");
+		
 	}
 
 	/******************************************************************
