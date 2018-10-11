@@ -213,8 +213,8 @@ public class Deck {
 	/******************************************************************
 	 * Takes a random value and random suit and actually chooses to 
 	 * place or use that card. Once the card is used it is removed.
-	 * @param chooseValue - int used for the value in the deck
-	 * @param chooseSuit - int used for the suit in the deck
+//	 * @param chooseValue - int used for the value in the deck
+//	 * @param chooseSuit - int used for the suit in the deck
 	 * @return 2D int array representing the chosen cards
 	 * @throws IllegalArgumentException when the deck is empty but a 
 	 * card is attempted to be chosen
@@ -344,8 +344,8 @@ public class Deck {
 
 	/******************************************************************
 	 * Sets a card to be 0
-	 * @param row - the row of the deck array 
-	 * @param col - the column of the deck array
+	 * @param value - the row of the deck array
+	 * @param suit - the column of the deck array
 	 *****************************************************************/
 	public void usedCard(int value, int suit) {
 		deck[value][suit] = 0;	
@@ -354,8 +354,8 @@ public class Deck {
 	/******************************************************************
 	 * Checks if the card has been used or not. If it has been used
 	 * then it will be 0 and then this method will return true
-	 * @param row - the row of the deck array
-	 * @param col - the column of the deck array
+	 * @param value - the row of the deck array
+	 * @param suit - the column of the deck array
 	 * @return true or false whether a card has been used
 	 *****************************************************************/
 	public boolean checkUsedCard(int value, int suit) {
