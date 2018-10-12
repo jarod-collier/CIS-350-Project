@@ -6,7 +6,7 @@ package specialCardGames;
  * @version 9/28/2018
  *
  *********************************************************************/
-public class GameLogic extends Deck{
+public class GameLogic{
 	
 	private Deck deck;
 	
@@ -68,7 +68,14 @@ public class GameLogic extends Deck{
 	 *****************************************************************/
 	public void redVsBlackScore(int suit) {
 		//TODO Change this
-		if(blackOrRed(suit) == blackOrRed(0)){
+
+		int color;
+		// If the card is a spade or club, it's black, so return 0
+		if (suit == 0 || suit == 2)
+			color = 0;
+		else
+			color = 1;
+		if(deck.blackOrRed(69) == color){
 			score = score - 1;
 		}
 		else{
@@ -81,7 +88,7 @@ public class GameLogic extends Deck{
 	 * guessed if the next card is higher or lower than the next card
 	 *****************************************************************/
 	public void lowerOrHigherScore(int loh){
-		if(loh == lowerOrHigher()){
+		if(loh == deck.lowerOrHigher()){
 			score = score - 2;
 		}
 		else{
@@ -94,7 +101,7 @@ public class GameLogic extends Deck{
 	 * guessed if the next card is in-between the previous two cards
 	 *****************************************************************/
 	public void insideOrOutsideScore(int ioo){
-		if(ioo == insideOrOutside()){
+		if(ioo == deck.insideOrOutside()){
 			score = score -3;
 		}
 		else{
@@ -107,7 +114,7 @@ public class GameLogic extends Deck{
 	 * card has the same suit as the players choice
 	 *****************************************************************/
 	public void guessSuitScore(int suit){
-		if(guessSuit(suit)){
+		if(deck.guessSuit(suit)){
 			score = score - 4;
 		}
 		else{
