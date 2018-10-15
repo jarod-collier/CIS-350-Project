@@ -14,9 +14,9 @@ public class GameLogic{
 
 
 	
-	public static void main(String[] args) {
-		
-	}
+//	public static void main(String[] args) {
+//
+//	}
 
 	/******************************************************************
 	 * Initializes the variables for the game logic 
