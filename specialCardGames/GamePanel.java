@@ -21,6 +21,8 @@ public class GamePanel extends JPanel {
         //get the image from the directory
         changeImage();
         setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        System.out.print(Toolkit.getDefaultToolkit().getScreenSize());
+
     }
 
     /******************************************************************
