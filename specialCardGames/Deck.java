@@ -247,7 +247,7 @@ public class Deck {
 	 * @param suit - int from 0-3 that represents the suit chosen
 	 * @return int value of 0 or 1. 0 if black, 1 if red.
 	 *****************************************************************/
-	public int blackOrRed(int suit) {
+	public int blackOrRed() {
 
 		// If the card is a spade or club, it's black, so return 0
 		if (chooseSuit() == 0 || chooseSuit() == 2)
