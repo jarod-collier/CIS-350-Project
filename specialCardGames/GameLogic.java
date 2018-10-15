@@ -18,10 +18,9 @@ public class GameLogic{
 	public GameLogic() {
 		
 		deck = new Deck();
-		
+		deck.chooseCard();
 		score = 0;
 
-		
 	}
 
 	/******************************************************************
@@ -50,6 +49,8 @@ public class GameLogic{
 			score++;
 		else
 			score--;
+
+		deck.chooseCard();
 	}
 
 	/******************************************************************
@@ -63,6 +64,8 @@ public class GameLogic{
 		else{
 			score += 2;
 		}
+
+		deck.chooseCard();
 	}
 
 	/******************************************************************
@@ -76,6 +79,8 @@ public class GameLogic{
 		else{
 			score += 3;
 		}
+
+		deck.chooseCard();
 	}
 
 	/******************************************************************
@@ -89,6 +94,8 @@ public class GameLogic{
 		else{
 			score += 4;
 		}
+
+		deck.chooseCard();
 	}
 
 	/******************************************************************
@@ -103,5 +110,7 @@ public class GameLogic{
 		else{
 			score += 10;
 		}
+
+		deck.chooseCard();
 	}
 }
