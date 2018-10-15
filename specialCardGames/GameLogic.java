@@ -40,6 +40,8 @@ public class GameLogic{
 	/******************************************************************
 	 * The first "level" of the game, checks if the randomly chosen
 	 * card has the same color as the players choice
+	 * @param color - The player input of red or black in integer form
+	 *                 in order to match the Deck class
 	 *****************************************************************/
 	public void redVsBlackScore(int color) {
 		//TODO Change this
@@ -56,6 +58,8 @@ public class GameLogic{
 	/******************************************************************
 	 * The second "level" of the game, checks if the player correctly
 	 * guessed if the next card is higher or lower than the next card
+	 * @param loh - The player input of lower or higher in integer
+	 *               form in order to match the Deck class
 	 *****************************************************************/
 	public void lowerOrHigherScore(int loh){
 		if(loh == deck.lowerOrHigher()){
@@ -71,6 +75,8 @@ public class GameLogic{
 	/******************************************************************
 	 * The third "level" of the game, checks if the player correctly
 	 * guessed if the next card is in-between the previous two cards
+	 * @param ioo - The player input of inside or outside in integer
+	 *              form in order to match the Deck class
 	 *****************************************************************/
 	public void insideOrOutsideScore(int ioo){
 		if(ioo == deck.insideOrOutside()){
@@ -86,6 +92,8 @@ public class GameLogic{
 	/******************************************************************
 	 * The fourth "level" of the game, checks if the randomly chosen
 	 * card has the same suit as the players choice
+	 * @param suit - The player input of the suit in integer form in
+	 *                order to match the Deck class
 	 *****************************************************************/
 	public void guessSuitScore(int suit){
 		if(deck.guessSuit(suit)){
@@ -101,6 +109,7 @@ public class GameLogic{
 	/******************************************************************
 	 * The fifth "level" of the game, checks if the randomly chosen
 	 * card has the same value as the players choice
+	 * @param value - The player input of a card value guess
 	 *****************************************************************/
 	public void guessCardValueScore(int value){
 		//TODO Change value

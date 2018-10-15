@@ -158,7 +158,7 @@ public class Deck {
 	 * @return int value 2-14 that represents the value of each card.
 	 * 11 is Jack, 12 is Queen, 13 is King, and 14 is Ace. 
 	 *****************************************************************/
-	public int chooseValue() {
+	private int chooseValue() {
 
 		// Resets the random value
 		randomValue = randomValueGen.nextInt(VALUES) + 2;
@@ -187,7 +187,7 @@ public class Deck {
 	 * @return int value 0-3 that represents the suit. 0 is Spades, 1
 	 * is Hearts, 2 is Clubs, and 3 is Diamonds
 	 *****************************************************************/
-	public int chooseSuit() {
+	private int chooseSuit() {
 
 		// Resets the random suit value
 		randomSuit = randomSuitGen.nextInt(SUITS);
@@ -213,8 +213,6 @@ public class Deck {
 	/******************************************************************
 	 * Takes a random value and random suit and actually chooses to 
 	 * place or use that card. Once the card is used it is removed.
-//	 * @param chooseValue - int used for the value in the deck
-//	 * @param chooseSuit - int used for the suit in the deck
 	 * @return 2D int array representing the chosen cards
 	 * @throws IllegalArgumentException when the deck is empty but a 
 	 * card is attempted to be chosen
@@ -249,7 +247,7 @@ public class Deck {
 	public int blackOrRed() {
 
 		// If the card is a spade or club, it's black, so return 0
-		if (chooseSuit() == 0 || chooseSuit() == 2)
+		if (randomSuit == 0 || randomSuit == 2)
 			return 0;
 		else
 			return 1;
@@ -324,6 +322,7 @@ public class Deck {
 	 * Checks if the user's guess is the same as the card
 	 * @param guessSuit - the value of the suit the user guesses
 	 * @return true or false whether the user is right or wrong
+	 * @throws IllegalArgumentException when you can't compare cards
 	 *****************************************************************/
 	public boolean guessSuit(int guessSuit) {
 
@@ -341,16 +340,17 @@ public class Deck {
 
 	}
 
-	
+
 	/******************************************************************
 	 * Checks if the user's guessed card is the same as what the 
 	 * System chose
 	 * @param guessValue - the value that the user chooses
 	 * @return true or false whether the user was right or wrong
+	 * @throws IllegalArgumentException when you can't compare cards
 	 *****************************************************************/
 	public boolean guessCard(int guessValue) {
 
-		// Makes sure there is a card to guess the suit from
+		// Makes sure there is a card to guess the value from
 		if (chosenCards.size() >= 1) {
 
 			// Checks if chosen card's suit is the same as guessSuit
@@ -362,6 +362,27 @@ public class Deck {
 		else
 			throw new IllegalArgumentException("Must pick a card");
 
+	}
+
+	/******************************************************************
+	 * Checks if the current card chosen is a face card
+	 * @return true or false if card is a face card
+	 * @throws IllegalArgumentException when you can't compare cards
+	 *****************************************************************/
+	public boolean checkFaceCard () {
+
+		// Makes sure there is a card to guess from
+		if (chosenCards.size() >= 1) {
+
+			// Checks if card has value of a face card
+			if (randomValue == 11 || randomValue == 12 
+					|| randomValue == 13 || randomValue == 14)
+				return true;
+			else
+				return false;			
+		}
+		else
+			throw new IllegalArgumentException("Must pick a card");
 	}
 
 	/******************************************************************
