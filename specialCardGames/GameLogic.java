@@ -10,14 +10,8 @@ public class GameLogic{
 	
 	private Deck deck;
 	
-	private int score, difference;
-
-
+	private int score;
 	
-//	public static void main(String[] args) {
-//
-//	}
-
 	/******************************************************************
 	 * Initializes the variables for the game logic 
 	 *****************************************************************/
@@ -26,11 +20,9 @@ public class GameLogic{
 		deck = new Deck();
 		
 		score = 0;
-		difference = 0;
 
 		
 	}
-
 
 	/******************************************************************
 	 * @return the score
@@ -39,27 +31,11 @@ public class GameLogic{
 		return score;
 	}
 
-
 	/******************************************************************
 	 * @param score the score to set
 	 *****************************************************************/
 	public void setScore(int score) {
 		this.score = score;
-	}
-
-
-	/******************************************************************
-	 * @return the difference
-	 *****************************************************************/
-	public int getDifference() {
-		return difference;
-	}
-
-	/******************************************************************
-	 * @param difference the difference to set
-	 *****************************************************************/
-	public void setDifference(int difference) {
-		this.difference = difference;
 	}
 
 	/******************************************************************
@@ -121,7 +97,7 @@ public class GameLogic{
 	 *****************************************************************/
 	public void guessCardValueScore(int value){
 		//TODO Change value
-		if(value == 0){
+		if(deck.guessCard(value)){
 			score -= 1;
 		}
 		else{
