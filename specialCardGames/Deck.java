@@ -244,7 +244,6 @@ public class Deck {
 
 	/******************************************************************
 	 * Checks whether the suit picked is black or red.
-	 * @param suit - int from 0-3 that represents the suit chosen
 	 * @return int value of 0 or 1. 0 if black, 1 if red.
 	 *****************************************************************/
 	public int blackOrRed() {
@@ -306,12 +305,12 @@ public class Deck {
 			// checks if recent card's value is inside others
 			if (third > first && third < second)
 				return -1;
-			
+
 			// checks if recent card's value is outside others
 			else if ( (third > first && third > second) ||
 					(third < first && third < second))
 				return 1;
-			
+
 			// if those don't work, recent card equals one of the cards
 			else
 				return 0;
@@ -320,17 +319,17 @@ public class Deck {
 			throw new IllegalArgumentException("Can't compare cards");
 
 	}
-	
+
 	/******************************************************************
 	 * Checks if the user's guess is the same as the card
 	 * @param guessSuit - the value of the suit the user guesses
 	 * @return true or false whether the user is right or wrong
 	 *****************************************************************/
 	public boolean guessSuit(int guessSuit) {
-		
+
 		// Makes sure there is a card to guess the suit from
 		if (chosenCards.size() >= 1) {
-			
+
 			// Checks if chosen card's suit is the same as guessSuit
 			if (getRandomSuit() == guessSuit)
 				return true;
@@ -339,7 +338,30 @@ public class Deck {
 		}
 		else
 			throw new IllegalArgumentException("Must pick a card");
-		
+
+	}
+
+	
+	/******************************************************************
+	 * Checks if the user's guessed card is the same as what the 
+	 * System chose
+	 * @param guessValue - the value that the user chooses
+	 * @return true or false whether the user was right or wrong
+	 *****************************************************************/
+	public boolean guessCard(int guessValue) {
+
+		// Makes sure there is a card to guess the suit from
+		if (chosenCards.size() >= 1) {
+
+			// Checks if chosen card's suit is the same as guessSuit
+			if (getRandomValue() == guessValue)
+				return true;
+			else
+				return false;
+		}
+		else
+			throw new IllegalArgumentException("Must pick a card");
+
 	}
 
 	/******************************************************************
