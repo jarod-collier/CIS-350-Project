@@ -80,8 +80,8 @@ public class GamePanel extends JPanel {
         //get the image from the directory
         changeImage();
 
-        repaint();
-
+        //set the size of the superPanel
+        setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
     /******************************************************************
