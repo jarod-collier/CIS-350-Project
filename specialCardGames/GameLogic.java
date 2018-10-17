@@ -47,11 +47,13 @@ public class GameLogic{
 		//TODO Change this
 
 		// Checks if correct
-		if (deck.blackOrRed() == color)
+		if (deck.blackOrRed() == color) {
 			score++;
-		else
+			//return ;
+		}
+		else {
 			score--;
-
+		}
 		deck.chooseCard();
 	}
 
@@ -121,5 +123,17 @@ public class GameLogic{
 		}
 
 		deck.chooseCard();
+	}/******************************************************************
+	 * The final "level" of the game, riding the bus. This method will
+	 * be repeatedly called by the gui, if the player picks a face card
+	 * they have to re-ride the bus. This just checks if the
+	 *****************************************************************/
+	public void checkFaceCardScore(int card){
+		if(deck.checkFaceCard()){
+
+		}
+		else{
+			score =
+		}
 	}
 }
