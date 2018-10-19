@@ -126,7 +126,7 @@ public class GamePanel extends JPanel implements ActionListener {
      * before it displays it on the panel.
      * @throws IOException if the image can't be loaded
      *****************************************************************/
-    public void changeImage()
+    private void changeImage()
     {
         try
         {

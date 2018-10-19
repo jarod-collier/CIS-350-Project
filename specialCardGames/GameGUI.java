@@ -4,11 +4,10 @@ package specialCardGames;
  * @author jarod
  *
  */
-import java.awt.Container;
-import javax.swing.JComponent;
+
 import javax.swing.JFrame;
 
-public class GameGUI extends JComponent
+public class GameGUI
 {
 	public static void main(String[] args)
 	{
