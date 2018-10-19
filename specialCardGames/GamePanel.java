@@ -4,13 +4,18 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.tools.Tool;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
     private Image backGround = null;
-    private Button cardFaceDown;
-    private Button cardFlipped;
+    private JLabel cardFaceDown;
+    private ImageIcon dealerCard;
+    private JLabel cardFlipped;
+    private ImageIcon lastCard;
+    private JLabel pointsLabel;
 
 
     /******************************************************************
@@ -28,11 +33,10 @@ public class GamePanel extends JPanel {
         JPanel pointsPanel = new JPanel();
 
 
-
-
-
         //set the size of points panel to quarter of the screen
         pointsPanel.setPreferredSize(new Dimension(screenWidth/4, screenHeight));
+        //pointsPanel.setPreferredSize(new Dimension(400, 200));
+
 
         //set the size of the cards panel to half of the screen
         cardsPanel.setPreferredSize(new Dimension(screenWidth/2,screenHeight));
@@ -45,16 +49,26 @@ public class GamePanel extends JPanel {
         splitPane.setRightComponent(cardsPanel);
 
 
+
         //make the splitter expandable
         splitPane.setOneTouchExpandable(true);
 
         //set preferred size to the size of the screen
         setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-        //create buttons for the cards panel
-        cardFaceDown = new Button("face down card");
+        //get Card images for display
+        dealerCard = new ImageIcon(getClass().getResource("cardImages/small/BackSmall.png"));
+        lastCard = new ImageIcon(getClass().getResource("cardImages/small/AH.png"));
 
-        cardFlipped = new Button("flipped card");
+        //create cards for the cards panel
+        cardFaceDown = new JLabel(dealerCard);
+        cardFlipped = new JLabel(lastCard);
+
+        //resize the label to fit the card images
+        cardFaceDown.setSize(dealerCard.getIconWidth(),dealerCard.getIconHeight());
+        cardFlipped.setSize(lastCard.getIconWidth(),dealerCard.getIconHeight());
+
+
         cardsPanel.setLayout(new GridLayout());
 
         //place the card face down button
@@ -69,12 +83,23 @@ public class GamePanel extends JPanel {
         loc.gridy = 0;
         cardsPanel.add(cardFlipped, loc);
 
+
+        //initialize the points label and place it on pointsPanel
+        pointsLabel = new JLabel("Players points: 0"); ///FIX ME
+        pointsLabel.setFont(new Font("Cooper Black", Font.BOLD, 30));
+        pointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        pointsPanel.add(pointsLabel, BorderLayout.CENTER);
+
         //make the panels & splitter transparent
         cardsPanel.setOpaque(false);
         pointsPanel.setOpaque(false);
         splitPane.setOpaque(false);
 
         splitPane.resetToPreferredSizes();
+
+        //make the splitPane not expandable
+        splitPane.setOneTouchExpandable(false);
+        splitPane.setBorder(null);
         add(splitPane);
 
         //get the image from the directory
@@ -114,5 +139,10 @@ public class GamePanel extends JPanel {
             JOptionPane.showMessageDialog(this,
                     "Couldn't load background");
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

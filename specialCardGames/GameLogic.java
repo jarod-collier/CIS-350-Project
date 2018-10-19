@@ -37,6 +37,22 @@ public class GameLogic{
 		this.score = score;
 	}
 
+	public String cardString(){
+		String card;
+		if(deck.getRandomSuit()==0){
+			card = deck.getRandomValue() + "S";
+		}
+		else if(deck.getRandomSuit()==1){
+			card = deck.getRandomValue() + "H";
+		}
+		else if(deck.getRandomSuit()==2){
+			card = deck.getRandomValue() + "C";
+		}
+		else{
+			card = deck.getRandomValue() + "D";
+		}
+		return card + ".png";
+	}
 	/******************************************************************
 	 * The first "level" of the game, checks if the randomly chosen
 	 * card has the same color as the players choice
@@ -123,17 +139,18 @@ public class GameLogic{
 		}
 
 		deck.chooseCard();
-	}/******************************************************************
-	 * The final "level" of the game, riding the bus. This method will
-	 * be repeatedly called by the gui, if the player picks a face card
-	 * they have to re-ride the bus. This just checks if the
-	 *****************************************************************/
-	public void checkFaceCardScore(int card){
-		if(deck.checkFaceCard()){
-
-		}
-		else{
-			score =
-		}
 	}
+//	/******************************************************************
+//	 * The final "level" of the game, riding the bus. This method will
+//	 * be repeatedly called by the gui, if the player picks a face card
+//	 * they have to re-ride the bus. This just checks if the
+//	 *****************************************************************/
+//	public void checkFaceCardScore(int card){
+//		if(deck.checkFaceCard()){
+//
+//		}
+//		else{
+//			score =
+//		}
+//	}
 }
