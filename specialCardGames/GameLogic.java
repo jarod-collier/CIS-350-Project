@@ -40,16 +40,16 @@ public class GameLogic{
 	public String cardString(){
 		String card;
 		if(deck.getRandomSuit()==0){
-			card = deck.getRandomValue() + "S";
+			card = deck.getLastChosenCard() + "S";
 		}
 		else if(deck.getRandomSuit()==1){
-			card = deck.getRandomValue() + "H";
+			card = deck.getLastChosenCard() + "H";
 		}
 		else if(deck.getRandomSuit()==2){
-			card = deck.getRandomValue() + "C";
+			card = deck.getLastChosenCard() + "C";
 		}
 		else{
-			card = deck.getRandomValue() + "D";
+			card = deck.getLastChosenCard() + "D";
 		}
 		return card + ".png";
 	}

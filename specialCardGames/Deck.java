@@ -57,10 +57,16 @@ public class Deck {
 		for (int i = 0; i < 52; i++) {
 			System.out.println("\nThe chosen card has a value of: " + d.chooseCard() + "\n");
 			d.printDeck();
-		}
+		};
+
+		System.out.println(d.getLastChosenCard());
+		
+		System.out.println(d.blackOrRed());
 		System.out.println(d.lowerOrHigher());
 		System.out.println(d.insideOrOutside());
 		System.out.println(d.guessSuit(2));
+		System.out.println(d.guessCard(7));
+		System.out.println(d.checkFaceCard());
 	}
 
 
@@ -131,6 +137,15 @@ public class Deck {
 	 *****************************************************************/
 	public void setRandomValue(int randomValue) {
 		this.randomValue = randomValue;
+	}
+
+	
+	/******************************************************************
+	 * Gets the last card that was chosen from the deck
+	 * @return int value of the most recently chosen card
+	 *****************************************************************/
+	public int getLastChosenCard() {
+		return chosenCards.get(chosenCards.size() -1);
 	}
 
 
@@ -375,8 +390,9 @@ public class Deck {
 		if (chosenCards.size() >= 1) {
 
 			// Checks if card has value of a face card
-			if (randomValue == 11 || randomValue == 12 
-					|| randomValue == 13 || randomValue == 14)
+			if (getLastChosenCard() == 11 || getLastChosenCard() == 12 
+					|| getLastChosenCard() == 13 
+					|| getLastChosenCard() == 14)
 				return true;
 			else
 				return false;			
@@ -448,6 +464,8 @@ public class Deck {
 
 				if (n % 13 == 0)
 					System.out.println("");
+				
+				
 			}
 		}
 	}
