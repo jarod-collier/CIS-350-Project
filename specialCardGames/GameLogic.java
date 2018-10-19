@@ -41,6 +41,7 @@ public class GameLogic{
 	 * This method is to help the GamePanel call the right .png file
 	 * when a card is chosen. It matches the names of the files in
 	 * our cardImages file
+	 * @return  The file's name
 	 *****************************************************************/
 	public String cardString(){
 		String card;
