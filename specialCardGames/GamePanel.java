@@ -16,6 +16,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private JLabel cardFlipped;
     private ImageIcon lastCard;
     private JLabel pointsLabel;
+    private GameLogic logic;
 
 
     /******************************************************************
@@ -23,6 +24,8 @@ public class GamePanel extends JPanel implements ActionListener {
      *****************************************************************/
     public GamePanel()
     {
+    	
+    	logic = new GameLogic();
 
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
