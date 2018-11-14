@@ -44,21 +44,78 @@ public class GameLogic{
 	 * @return  The file's name
 	 *****************************************************************/
 	public String cardString(){
-		String card;
+		String card = "cardImages/small/";
 		if(deck.getRandomSuit()==0){
-			card = deck.getLastChosenCard() + "S";
+			if(deck.getLastChosenCard() == 11){
+				card += "J" + "S";
+			}
+			else if(deck.getLastChosenCard() == 12){
+				card += "Q" + "S";
+			}
+			else if(deck.getLastChosenCard() == 13){
+				card += "K" + "S";
+			}
+			else if(deck.getLastChosenCard() == 14){
+				card += "A" + "S";
+			}
+			else{
+				card += deck.getLastChosenCard() + "S";
+			}
 		}
 		else if(deck.getRandomSuit()==1){
-			card = deck.getLastChosenCard() + "H";
+			if(deck.getLastChosenCard() == 11){
+				card += "J" + "H";
+			}
+			else if(deck.getLastChosenCard() == 12){
+				card += "Q" + "H";
+			}
+			else if(deck.getLastChosenCard() == 13){
+				card += "K" + "H";
+			}
+			else if(deck.getLastChosenCard() == 14){
+				card += "A" + "H";
+			}
+			else{
+				card += deck.getLastChosenCard() + "H";
+			}
 		}
 		else if(deck.getRandomSuit()==2){
-			card = deck.getLastChosenCard() + "C";
+			if(deck.getLastChosenCard() == 11){
+				card += "J" + "C";
+			}
+			else if(deck.getLastChosenCard() == 12){
+				card += "Q" + "C";
+			}
+			else if(deck.getLastChosenCard() == 13){
+				card += "K" + "C";
+			}
+			else if(deck.getLastChosenCard() == 14){
+				card += "A" + "C";
+			}
+			else{
+				card += deck.getLastChosenCard() + "C";
+			}
 		}
 		else{
-			card = deck.getLastChosenCard() + "D";
+			if(deck.getLastChosenCard() == 11){
+				card += "J" + "D";
+			}
+			else if(deck.getLastChosenCard() == 12){
+				card += "Q" + "D";
+			}
+			else if(deck.getLastChosenCard() == 13){
+				card += "K" + "D";
+			}
+			else if(deck.getLastChosenCard() == 14){
+				card += "A" + "D";
+			}
+			else{
+				card += deck.getLastChosenCard() + "D";
+			}
 		}
 		return card + ".png";
 	}
+
 	/******************************************************************
 	 * The first "level" of the game, checks if the randomly chosen
 	 * card has the same color as the players choice
