@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d761078e-e222-4b42-b465-8dcaafe2deaf" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CIS-350-Project/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/GameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/GameGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/GameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/GameLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/GamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/cardImages/small/AH.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CIS-350-Project/specialCardGames/cardImages/small/AH.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/specialCardGames/GameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/specialCardGames/GameGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/specialCardGames/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/specialCardGames/GamePanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,26 +16,96 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="GameGUI.java" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GameGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="210">
+              <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GamePanel.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GamePanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+            <state relative-caret-position="1014">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specialCardGames/Deck.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-207">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding>
+                <element signature="docComment;class#Deck#0" />
+                <element signature="docComment;field#deck#0;class#Deck#0" />
+                <element signature="docComment;field#shuffled#0;class#Deck#0" />
+                <element signature="docComment;field#chosenCards#0;class#Deck#0" />
+                <element signature="docComment;field#randomSuitGen#0;class#Deck#0" />
+                <element signature="docComment;field#randomValueGen#0;class#Deck#0" />
+                <element signature="docComment;field#randomSuit#0;class#Deck#0" />
+                <element signature="docComment;field#randomValue#0;class#Deck#0" />
+                <element signature="docComment;field#SUITS#0;class#Deck#0" />
+                <element signature="docComment;field#VALUES#0;class#Deck#0" />
+                <element signature="method#main#0;class#Deck#0" />
+                <element signature="docComment;method#Deck#0;class#Deck#0" />
+                <element signature="method#Deck#0;class#Deck#0" />
+                <element signature="docComment;method#getRandomSuit#0;class#Deck#0" />
+                <element signature="docComment;method#setRandomSuit#0;class#Deck#0" />
+                <element signature="docComment;method#getRandomValue#0;class#Deck#0" />
+                <element signature="docComment;method#setRandomValue#0;class#Deck#0" />
+                <element signature="docComment;method#getLastChosenCard#0;class#Deck#0" />
+                <element signature="e#4369#4370#0" expanded="true" />
+                <element signature="e#4421#4422#0" expanded="true" />
+                <element signature="docComment;method#shuffle#0;class#Deck#0" />
+                <element signature="method#shuffle#0;class#Deck#0" />
+                <element signature="docComment;method#chooseValue#0;class#Deck#0" />
+                <element signature="method#chooseValue#0;class#Deck#0" />
+                <element signature="docComment;method#chooseSuit#0;class#Deck#0" />
+                <element signature="method#chooseSuit#0;class#Deck#0" />
+                <element signature="docComment;method#chooseCard#0;class#Deck#0" />
+                <element signature="method#chooseCard#0;class#Deck#0" />
+                <element signature="docComment;method#blackOrRed#0;class#Deck#0" />
+                <element signature="method#blackOrRed#0;class#Deck#0" />
+                <element signature="docComment;method#lowerOrHigher#0;class#Deck#0" />
+                <element signature="method#lowerOrHigher#0;class#Deck#0" />
+                <element signature="docComment;method#insideOrOutside#0;class#Deck#0" />
+                <element signature="method#insideOrOutside#0;class#Deck#0" />
+                <element signature="docComment;method#guessSuit#0;class#Deck#0" />
+                <element signature="method#guessSuit#0;class#Deck#0" />
+                <element signature="docComment;method#guessCard#0;class#Deck#0" />
+                <element signature="method#guessCard#0;class#Deck#0" />
+                <element signature="docComment;method#checkFaceCard#0;class#Deck#0" />
+                <element signature="method#checkFaceCard#0;class#Deck#0" />
+                <element signature="docComment;method#usedCard#0;class#Deck#0" />
+                <element signature="docComment;method#checkUsedCard#0;class#Deck#0" />
+                <element signature="method#checkUsedCard#0;class#Deck#0" />
+                <element signature="docComment;method#emptyDeck#0;class#Deck#0" />
+                <element signature="method#emptyDeck#0;class#Deck#0" />
+                <element signature="docComment;method#printDeck#0;class#Deck#0" />
+                <element signature="method#printDeck#0;class#Deck#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameLogic.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specialCardGames/GameLogic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-647">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindBugs-IDEA-Workspace">
+    <toolWindowGroupBy>Class</toolWindowGroupBy>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,10 +113,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/specialCardGames/GamePanel.java" />
         <option value="$PROJECT_DIR$/specialCardGames/GameGUI.java" />
+        <option value="$PROJECT_DIR$/specialCardGames/GamePanel.java" />
       </list>
     </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -70,41 +138,21 @@
             <path>
               <item name="CIS-350-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CIS-350-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CIS-350-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CIS-350-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CIS-350-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CIS-350-Project" type="462c0819:PsiDirectoryNode" />
               <item name="specialCardGames" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -194,42 +242,148 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" weight="0.3089655" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info id="Image Layers" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32965517" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info id="Capture Tool" />
-      <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
-      <window_info id="Learn" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" weight="0.32965517" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3089655" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32965517" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16478191" />
+      <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" />
-      <window_info anchor="right" id="Theme Preview" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
+        <state relative-caret-position="1800">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
           <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
         </state>
       </provider>
@@ -239,18 +393,157 @@
         <state relative-caret-position="-1" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/CIS-350-Project/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/CIS-350-Project/.idea/checkstyle-idea.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+    <entry file="file://$PROJECT_DIR$/specialCardGames/Deck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="-207">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;class#Deck#0" />
+            <element signature="docComment;field#deck#0;class#Deck#0" />
+            <element signature="docComment;field#shuffled#0;class#Deck#0" />
+            <element signature="docComment;field#chosenCards#0;class#Deck#0" />
+            <element signature="docComment;field#randomSuitGen#0;class#Deck#0" />
+            <element signature="docComment;field#randomValueGen#0;class#Deck#0" />
+            <element signature="docComment;field#randomSuit#0;class#Deck#0" />
+            <element signature="docComment;field#randomValue#0;class#Deck#0" />
+            <element signature="docComment;field#SUITS#0;class#Deck#0" />
+            <element signature="docComment;field#VALUES#0;class#Deck#0" />
+            <element signature="method#main#0;class#Deck#0" />
+            <element signature="docComment;method#Deck#0;class#Deck#0" />
+            <element signature="method#Deck#0;class#Deck#0" />
+            <element signature="docComment;method#getRandomSuit#0;class#Deck#0" />
+            <element signature="docComment;method#setRandomSuit#0;class#Deck#0" />
+            <element signature="docComment;method#getRandomValue#0;class#Deck#0" />
+            <element signature="docComment;method#setRandomValue#0;class#Deck#0" />
+            <element signature="docComment;method#getLastChosenCard#0;class#Deck#0" />
+            <element signature="e#4369#4370#0" expanded="true" />
+            <element signature="e#4421#4422#0" expanded="true" />
+            <element signature="docComment;method#shuffle#0;class#Deck#0" />
+            <element signature="method#shuffle#0;class#Deck#0" />
+            <element signature="docComment;method#chooseValue#0;class#Deck#0" />
+            <element signature="method#chooseValue#0;class#Deck#0" />
+            <element signature="docComment;method#chooseSuit#0;class#Deck#0" />
+            <element signature="method#chooseSuit#0;class#Deck#0" />
+            <element signature="docComment;method#chooseCard#0;class#Deck#0" />
+            <element signature="method#chooseCard#0;class#Deck#0" />
+            <element signature="docComment;method#blackOrRed#0;class#Deck#0" />
+            <element signature="method#blackOrRed#0;class#Deck#0" />
+            <element signature="docComment;method#lowerOrHigher#0;class#Deck#0" />
+            <element signature="method#lowerOrHigher#0;class#Deck#0" />
+            <element signature="docComment;method#insideOrOutside#0;class#Deck#0" />
+            <element signature="method#insideOrOutside#0;class#Deck#0" />
+            <element signature="docComment;method#guessSuit#0;class#Deck#0" />
+            <element signature="method#guessSuit#0;class#Deck#0" />
+            <element signature="docComment;method#guessCard#0;class#Deck#0" />
+            <element signature="method#guessCard#0;class#Deck#0" />
+            <element signature="docComment;method#checkFaceCard#0;class#Deck#0" />
+            <element signature="method#checkFaceCard#0;class#Deck#0" />
+            <element signature="docComment;method#usedCard#0;class#Deck#0" />
+            <element signature="docComment;method#checkUsedCard#0;class#Deck#0" />
+            <element signature="method#checkUsedCard#0;class#Deck#0" />
+            <element signature="docComment;method#emptyDeck#0;class#Deck#0" />
+            <element signature="method#emptyDeck#0;class#Deck#0" />
+            <element signature="docComment;method#printDeck#0;class#Deck#0" />
+            <element signature="method#printDeck#0;class#Deck#0" />
+          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-647">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GameGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specialCardGames/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1014">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CIS-350-Project</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

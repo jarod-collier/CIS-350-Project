@@ -37,24 +37,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
         //set the size of points panel to quarter of the screen
-        pointsPanel.setPreferredSize(new Dimension(screenWidth/4, screenHeight));
-        //pointsPanel.setPreferredSize(new Dimension(400, 200));
+        //pointsPanel.setPreferredSize(new Dimension(screenWidth/4, screenHeight));
+        pointsPanel.setPreferredSize(new Dimension(400, 200));
 
 
         //set the size of the cards panel to half of the screen
         cardsPanel.setPreferredSize(new Dimension(screenWidth/2,screenHeight));
-
-        //create a splitter to place the panels
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-
-        //add the panels to the splitter
-        splitPane.setLeftComponent(pointsPanel);
-        splitPane.setRightComponent(cardsPanel);
-
-
-
-        //make the splitter expandable
-        splitPane.setOneTouchExpandable(true);
 
         //set preferred size to the size of the screen
         setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -96,14 +84,9 @@ public class GamePanel extends JPanel implements ActionListener {
         //make the panels & splitter transparent
         cardsPanel.setOpaque(false);
         pointsPanel.setOpaque(false);
-        splitPane.setOpaque(false);
 
-        splitPane.resetToPreferredSizes();
-
-        //make the splitPane not expandable
-        splitPane.setOneTouchExpandable(false);
-        splitPane.setBorder(null);
-        add(splitPane);
+        add(pointsPanel, BorderLayout.WEST);
+        add(cardsPanel, BorderLayout.CENTER);
 
         //get the image from the directory
         changeImage();
