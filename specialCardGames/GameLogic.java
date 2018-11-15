@@ -13,12 +13,15 @@ public class GameLogic{
 	private int score;
 	
 	/******************************************************************
-	 * Initializes the variables for the game logic 
+	 * Initializes the variables for the game logic for the first phase
 	 *****************************************************************/
 	public GameLogic() {
 		
 		deck = new Deck();
-		deck.chooseCard();
+
+		for (int amountOfCards = 0; amountOfCards < 52; amountOfCards++)
+			deck.chooseCard();
+
 		score = 0;
 
 	}
@@ -43,74 +46,74 @@ public class GameLogic{
 	 * our cardImages file
 	 * @return  The file's name
 	 *****************************************************************/
-	public String cardString(){
+	public String cardString(int valueFromBack){
 		String card = "cardImages/small/";
-		if(deck.getRandomSuit()==0){
-			if(deck.getLastChosenCard() == 11){
+		if(deck.getSuitFromBack(valueFromBack)==0){
+			if(deck.getCardFromBack(valueFromBack) == 11){
 				card += "J" + "S";
 			}
-			else if(deck.getLastChosenCard() == 12){
+			else if(deck.getCardFromBack(valueFromBack) == 12){
 				card += "Q" + "S";
 			}
-			else if(deck.getLastChosenCard() == 13){
+			else if(deck.getCardFromBack(valueFromBack) == 13){
 				card += "K" + "S";
 			}
-			else if(deck.getLastChosenCard() == 14){
+			else if(deck.getCardFromBack(valueFromBack) == 14){
 				card += "A" + "S";
 			}
 			else{
-				card += deck.getLastChosenCard() + "S";
+				card += deck.getCardFromBack(valueFromBack) + "S";
 			}
 		}
-		else if(deck.getRandomSuit()==1){
-			if(deck.getLastChosenCard() == 11){
+		else if(deck.getSuitFromBack(valueFromBack) == 1){
+			if(deck.getCardFromBack(valueFromBack) == 11){
 				card += "J" + "H";
 			}
-			else if(deck.getLastChosenCard() == 12){
+			else if(deck.getCardFromBack(valueFromBack) == 12){
 				card += "Q" + "H";
 			}
-			else if(deck.getLastChosenCard() == 13){
+			else if(deck.getCardFromBack(valueFromBack) == 13){
 				card += "K" + "H";
 			}
-			else if(deck.getLastChosenCard() == 14){
+			else if(deck.getCardFromBack(valueFromBack) == 14){
 				card += "A" + "H";
 			}
 			else{
-				card += deck.getLastChosenCard() + "H";
+				card += deck.getCardFromBack(valueFromBack) + "H";
 			}
 		}
-		else if(deck.getRandomSuit()==2){
-			if(deck.getLastChosenCard() == 11){
+		else if(deck.getSuitFromBack(valueFromBack) == 2){
+			if(deck.getCardFromBack(valueFromBack) == 11){
 				card += "J" + "C";
 			}
-			else if(deck.getLastChosenCard() == 12){
+			else if(deck.getCardFromBack(valueFromBack) == 12){
 				card += "Q" + "C";
 			}
-			else if(deck.getLastChosenCard() == 13){
+			else if(deck.getCardFromBack(valueFromBack) == 13){
 				card += "K" + "C";
 			}
-			else if(deck.getLastChosenCard() == 14){
+			else if(deck.getCardFromBack(valueFromBack) == 14){
 				card += "A" + "C";
 			}
 			else{
-				card += deck.getLastChosenCard() + "C";
+				card += deck.getCardFromBack(valueFromBack) + "C";
 			}
 		}
 		else{
-			if(deck.getLastChosenCard() == 11){
+			if(deck.getCardFromBack(valueFromBack) == 11){
 				card += "J" + "D";
 			}
-			else if(deck.getLastChosenCard() == 12){
+			else if(deck.getCardFromBack(valueFromBack) == 12){
 				card += "Q" + "D";
 			}
-			else if(deck.getLastChosenCard() == 13){
+			else if(deck.getCardFromBack(valueFromBack) == 13){
 				card += "K" + "D";
 			}
-			else if(deck.getLastChosenCard() == 14){
+			else if(deck.getCardFromBack(valueFromBack) == 14){
 				card += "A" + "D";
 			}
 			else{
-				card += deck.getLastChosenCard() + "D";
+				card += deck.getCardFromBack(valueFromBack) + "D";
 			}
 		}
 		return card + ".png";
