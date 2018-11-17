@@ -19,21 +19,30 @@ public class GamePanel extends JPanel implements ActionListener {
             inOutLabel, suitLabel, randomLabel, pointsLabel;
 
     // ImageIcons for all of the cards
-    private ImageIcon dealerCard , redBlackCard, highLowCard,
+    private ImageIcon dealerCard, redBlackCard, highLowCard,
             inOutCard, suitCard, randomCard;
 
-    // Creates the buttons for the usersChoicePanel
+    // Creates the color buttons
     private JButton redButton, blackButton;
+    private JButton[] colors;
 
+    // Creates the highLow buttons
     private JButton higherButton, lowerButton, hiLowEqualButton;
+    private JButton[] highLow;
 
+    // Creates the inOutButtons
     private JButton insideButton, outsideButton, inOutEqualButton;
+    private JButton[] inOut;
 
+    // Creates the suits buttons
     private JButton spadesButton, heartsButton, clubsButton, diamondsButton;
+    private JButton[] suits;
 
+    // Creates the buttons for the numbers
     private JButton twoButton, threeButton, fourButton, fiveButton, sixButton,
             sevenButton, eightButton, nineButton, tenButton,
             jackButton, queenButton, kingButton, aceButton;
+    private JButton[] numbers;
 
     private GameLogic logic;
 
@@ -53,8 +62,15 @@ public class GamePanel extends JPanel implements ActionListener {
 
         logic = new GameLogic();
 
+        // Arrays for different buttons
+        colors = new JButton[2];
+        highLow = new JButton[3];
+        inOut = new JButton[3];
+        suits = new JButton[4];
+        numbers = new JButton[13];
+
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-        int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height - 200;
+        int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 
         System.out.println(screenHeight);
         System.out.println(screenWidth);
@@ -97,23 +113,39 @@ public class GamePanel extends JPanel implements ActionListener {
         suitLabel.setVisible(true);
         randomLabel.setVisible(true);
 
-        // initialize the buttons
+        // initialize the color buttons
         redButton = new JButton("Red");
         blackButton = new JButton("Black");
+        colors[0] = redButton;
+        colors[1] = blackButton;
 
+        // Initialize the highLow buttons
         higherButton = new JButton("Higher");
         lowerButton = new JButton("Lower");
         hiLowEqualButton = new JButton("Equal");
+        highLow[0] = higherButton;
+        highLow[1] = lowerButton;
+        highLow[2] = hiLowEqualButton;
 
+        // Initialize the inOut buttons
         insideButton = new JButton("Inside");
         outsideButton = new JButton("Outside");
         inOutEqualButton = new JButton("Equal");
+        inOut[0] = insideButton;
+        inOut[1] = outsideButton;
+        inOut[2] = inOutEqualButton;
 
+        // Initialize the suit buttons
         spadesButton = new JButton("Spades");
         heartsButton = new JButton("Hearts");
         clubsButton = new JButton("Clubs");
         diamondsButton = new JButton("Diamonds");
+        suits[0] = spadesButton;
+        suits[1] = heartsButton;
+        suits[2] = clubsButton;
+        suits[3] = diamondsButton;
 
+        // Initialize the number buttons
         twoButton = new JButton("Two");
         threeButton = new JButton("Three");
         fourButton = new JButton("Four");
@@ -127,40 +159,46 @@ public class GamePanel extends JPanel implements ActionListener {
         queenButton = new JButton("Queen");
         kingButton = new JButton("King");
         aceButton = new JButton("Ace");
+        numbers[0] = twoButton;
+        numbers[1] = threeButton;
+        numbers[2] = fourButton;
+        numbers[3] = fiveButton;
+        numbers[4] = sixButton;
+        numbers[5] = sevenButton;
+        numbers[6] = eightButton;
+        numbers[7] = nineButton;
+        numbers[8] = tenButton;
+        numbers[9] = jackButton;
+        numbers[10] = queenButton;
+        numbers[11] = kingButton;
+        numbers[12] = aceButton;
 
-        // add action listeners to the buttons
-        redButton.addActionListener(this);
-        blackButton.addActionListener(this);
+        // add action listeners to the color buttons
+        for (int colorsSize = 0; colorsSize < colors.length; colorsSize++) {
+            colors[colorsSize].addActionListener(this);
+        }
+        // Add action listeners to the highLow buttons
+        for (int highLowSize = 0; highLowSize < highLow.length; highLowSize++) {
+            highLow[highLowSize].addActionListener(this);
+        }
 
-        higherButton.addActionListener(this);
-        lowerButton.addActionListener(this);
-        hiLowEqualButton.addActionListener(this);
+        // Add action listeners to the inOut buttons
+        for (int inOutSize = 0; inOutSize < inOut.length; inOutSize++) {
+            inOut[inOutSize].addActionListener(this);
+        }
 
-        insideButton.addActionListener(this);
-        outsideButton.addActionListener(this);
-        inOutEqualButton.addActionListener(this);
+        // Add action listeners to the suit buttons
+        for (int suitSize = 0; suitSize < suits.length; suitSize++) {
+            suits[suitSize].addActionListener(this);
+        }
 
-        spadesButton.addActionListener(this);
-        heartsButton.addActionListener(this);
-        clubsButton.addActionListener(this);
-        diamondsButton.addActionListener(this);
-
-        twoButton.addActionListener(this);
-        threeButton.addActionListener(this);
-        fourButton.addActionListener(this);
-        fiveButton.addActionListener(this);
-        sixButton.addActionListener(this);
-        sevenButton.addActionListener(this);
-        eightButton.addActionListener(this);
-        nineButton.addActionListener(this);
-        tenButton.addActionListener(this);
-        jackButton.addActionListener(this);
-        queenButton.addActionListener(this);
-        kingButton.addActionListener(this);
-        aceButton.addActionListener(this);
+        // Add action listeners to the number buttons
+        for (int numbersSize = 0; numbersSize < numbers.length; numbersSize++) {
+            numbers[numbersSize].addActionListener(this);
+        }
 
         //initialize the points label
-        pointsLabel = new JLabel("Players points: 0"); ///FIX ME
+        pointsLabel = new JLabel("Players points: " + logic.getScore());
         pointsLabel.setFont(new Font("Cooper Black", Font.BOLD, 30));
 
         // Create one JPanel for the first stage of the game
@@ -169,6 +207,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // --------------------------------------------------------------------------------
 
+        // Sets layout of how cards are set
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipadx = 8;
@@ -208,7 +247,7 @@ public class GamePanel extends JPanel implements ActionListener {
         // --------------------------------------------------------------------------------
 
         // First questions buttons
-        c.gridheight = 2;
+        c.gridheight = 1;
         c.gridwidth = 1;
         c.gridx = BUTTONS_X_VALUE;
         c.gridy = BUTTONS_Y_VALUE;
@@ -217,136 +256,116 @@ public class GamePanel extends JPanel implements ActionListener {
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(blackButton, c);
 
+
         // Second questions buttons
-        c.gridheight = 1;
         c.gridx = BUTTONS_X_VALUE + 1;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(higherButton, c);
-//        higherButton.setVisible(false);
-        higherButton.setEnabled(false);
+        higherButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(lowerButton, c);
-//        lowerButton.setVisible(false);
-        lowerButton.setEnabled(false);
+        lowerButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 2;
         firstStage.add(hiLowEqualButton, c);
-//        hiLowEqualButton.setVisible(false);
-        hiLowEqualButton.setEnabled(false);
+        hiLowEqualButton.setVisible(false);
 
         // Third questions buttons
         c.gridx = BUTTONS_X_VALUE + 2;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(insideButton, c);
-//        insideButton.setVisible(false);
-        insideButton.setEnabled(false);
+        insideButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(outsideButton, c);
-//        outsideButton.setVisible(false);
-        outsideButton.setEnabled(false);
+        outsideButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 2;
         firstStage.add(inOutEqualButton, c);
-//        inOutEqualButton.setVisible(false);
-        inOutEqualButton.setEnabled(false);
+        inOutEqualButton.setVisible(false);
 
         // Fourth Questions buttons
-        c.gridheight = 2;
         c.gridx = BUTTONS_X_VALUE + 3;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(spadesButton, c);
-//        spadesButton.setVisible(false);
-        spadesButton.setEnabled(false);
+        spadesButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(heartsButton, c);
-//        heartsButton.setVisible(false);
-        heartsButton.setEnabled(false);
+        heartsButton.setVisible(false);
 
         c.gridx = BUTTONS_X_VALUE + 4;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(clubsButton, c);
-//        clubsButton.setVisible(false);
-        clubsButton.setEnabled(false);
+        clubsButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(diamondsButton, c);
-//        diamondsButton.setVisible(false);
-        diamondsButton.setEnabled(false);
+        diamondsButton.setVisible(false);
 
         // Fifth Questions buttons
-        c.gridheight = 1;
         c.gridx = BUTTONS_X_VALUE + 5;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(twoButton, c);
-//        twoButton.setVisible(false);
-        twoButton.setEnabled(false);
+        twoButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(fiveButton, c);
-//        fiveButton.setVisible(false);
-        fiveButton.setEnabled(false);
+        fiveButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 2;
         firstStage.add(eightButton, c);
-//        eightButton.setVisible(false);
-        eightButton.setEnabled(false);
+        eightButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 3;
         firstStage.add(jackButton, c);
-//        jackButton.setVisible(false);
-        jackButton.setEnabled(false);
+        jackButton.setVisible(false);
 
         c.gridx = BUTTONS_X_VALUE + 6;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(threeButton, c);
-//        threeButton.setVisible(false);
-        threeButton.setEnabled(false);
+        threeButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(sixButton, c);
-//        sixButton.setVisible(false);
-        sixButton.setEnabled(false);
+        sixButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 2;
         firstStage.add(nineButton, c);
-//        nineButton.setVisible(false);
-        nineButton.setEnabled(false);
+        nineButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 3;
         firstStage.add(queenButton, c);
-//        queenButton.setVisible(false);
-        queenButton.setEnabled(false);
+        queenButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 4;
         firstStage.add(aceButton, c);
-//        aceButton.setVisible(false);
-        aceButton.setEnabled(false);
+        aceButton.setVisible(false);
 
         c.gridx = BUTTONS_X_VALUE + 7;
         c.gridy = BUTTONS_Y_VALUE;
         firstStage.add(fourButton, c);
-//        fourButton.setVisible(false);
-        fourButton.setEnabled(false);
+        fourButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 1;
         firstStage.add(sevenButton, c);
-//        sevenButton.setVisible(false);
-        sevenButton.setEnabled(false);
+        sevenButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 2;
         firstStage.add(tenButton, c);
-//        tenButton.setVisible(false);
-        tenButton.setEnabled(false);
+        tenButton.setVisible(false);
 
         c.gridy = BUTTONS_Y_VALUE + 3;
         firstStage.add(kingButton, c);
-//        kingButton.setVisible(false);
-        kingButton.setEnabled(false);
+        kingButton.setVisible(false);
 
         // --------------------------------------------------------------------------------
+
+        // Add the points label to the panel in line with cards
+        c.gridx = BUTTONS_X_VALUE + 8;
+        c.gridy = CARDS_Y_VALUE;
+        firstStage.add(pointsLabel, c);
 
         //make the panel transparent
         firstStage.setOpaque(false);
@@ -354,112 +373,6 @@ public class GamePanel extends JPanel implements ActionListener {
         // Place the panel in the frame
         add(firstStage, BorderLayout.CENTER);
 //        add(firstStage);
-
-
-//        //create 3 panels for points, cards, leader board
-//        JPanel cardsPanel = new JPanel();
-//        JPanel pointsPanel = new JPanel();
-//        JPanel usersChoicePanel = new JPanel();
-//
-//
-//        //set the size of points panel to quarter of the screen
-//        pointsPanel.setPreferredSize(new Dimension(screenWidth/6, screenHeight /4));
-//        //pointsPanel.setPreferredSize(new Dimension(400, 200));
-//
-//
-//        //set the size of the cards panel to half of the screen
-//        cardsPanel.setPreferredSize(new Dimension(screenWidth / 2, screenHeight /2));
-//
-//        //set the size of the usersChoicePanel to the length of the screen
-//        usersChoicePanel.setPreferredSize(new Dimension(screenWidth, screenHeight / 2));
-//
-//        // Creating the layout for the card panel
-//        cardsPanel.setLayout(new GridLayout(1,6,10,10));
-//        //cardsPanel.setLayout(new GridLayout());
-//
-//        //place the dealers card
-//        GridBagConstraints loc = new GridBagConstraints();
-//        loc.gridx = 0;
-//        loc.gridy = 0;
-//        cardsPanel.add(dealerLabel, loc);
-//
-//        //place the redBlack card
-//        loc.gridx = 1;
-//        cardsPanel.add(redBlackLabel, loc);
-//
-//        //place the highLow card
-//        loc.gridx = 2;
-//        cardsPanel.add(highLowLabel, loc);
-//
-//
-//        //place the inOut card
-//        loc.gridx = 3;
-//        cardsPanel.add(inOutLabel, loc);
-//
-//
-//        //place the suit card
-//        loc.gridx = 4;
-//        cardsPanel.add(suitLabel, loc);
-//
-//
-//        //place the random card
-//        loc.gridx = 5;
-//        cardsPanel.add(randomLabel, loc);
-//
-//        // Creating the layout for the usersChoicePanel
-//        usersChoicePanel.setLayout(new GridLayout(3,5, 10, 10));
-//
-//        //place the first round's buttons
-//        GridBagLayout pos = new GridBagLayout();
-//        redButton.setPreferredSize(new Dimension(50,50));
-//
-//        usersChoicePanel.add(redButton, pos.location(0,0));
-//
-//        usersChoicePanel.add(blackButton, pos.location(0,1));
-//
-//        usersChoicePanel.add(higherButton, pos.location(1,0));
-//
-//        usersChoicePanel.add(lowerButton, pos.location(1,1));
-//
-//        usersChoicePanel.add(hiLowEqualButton, pos.location(1,2));
-//
-////        pos.gridx = 2;
-////        pos.gridy = 0;
-////        usersChoicePanel.add(insideButton, pos);
-////
-////        pos.gridy = -1;
-////        usersChoicePanel.add(outsideButton, pos);
-////
-////        pos.gridy = -2;
-////        usersChoicePanel.add(inOutEqualButton, pos);
-////
-////        pos.gridx = 3;
-////        pos.gridy = 0;
-////        usersChoicePanel.add(spadesButton, pos);
-////
-////        pos.gridy = -1;
-////        usersChoicePanel.add(heartsButton, pos);
-////
-////        pos.gridy = -2;
-////        usersChoicePanel.add(clubsButton, pos);
-////
-////        pos.gridy = -3;
-////        usersChoicePanel.add(diamondsButton, pos);
-//
-//
-//
-//        // Place pointsLabel on panel
-//        pointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//        pointsPanel.add(pointsLabel, BorderLayout.WEST);
-//
-//        //make the panels & splitter transparent
-//        cardsPanel.setOpaque(false);
-//        pointsPanel.setOpaque(false);
-//        usersChoicePanel.setOpaque(false);
-//
-//        add(pointsPanel, BorderLayout.WEST);
-//        add(cardsPanel, BorderLayout.NORTH);
-//        add(usersChoicePanel, BorderLayout.SOUTH);
 
         //get the image from the directory
         changeImage();
@@ -496,26 +409,32 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     @Override
+    /******************************************************************
+     * Creates all of the events whenever a user clicks on something
+     * @param e - the event of the user clicking something
+     *****************************************************************/
     public void actionPerformed(ActionEvent e) {
         Object choice = e.getSource();
 
-        if (choice == redButton || choice == blackButton){
+        // Checks if user clicks on red or black
+        if (choice == redButton || choice == blackButton) {
             redBlackLabel.setVisible(true);
 
             JOptionPane.showMessageDialog(null,
                     "Check if this guess is correct somehow");
 
-//            higherButton.setVisible(true);
-//            lowerButton.setVisible(true);
-//            hiLowEqualButton.setVisible(true);
-            higherButton.setEnabled(true);
-            lowerButton.setEnabled(true);
-            hiLowEqualButton.setEnabled(true);
+            // Make highLow buttons visible
+            for (int highLowSize = 0; highLowSize < highLow.length; highLowSize++) {
+                highLow[highLowSize].setVisible(true);
+            }
 
-            redButton.setEnabled(false);
-            blackButton.setEnabled(false);
+            // Make color buttons invisible
+            for (int colorsSize = 0; colorsSize < colors.length; colorsSize++) {
+                colors[colorsSize].setVisible(false);
+            }
         }
 
+        // Checks if user clicked higher or lower
         if (choice == higherButton || choice == lowerButton ||
                 choice == hiLowEqualButton) {
             highLowLabel.setVisible(true);
@@ -523,18 +442,18 @@ public class GamePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null,
                     "Check if this guess is correct somehow");
 
-//            insideButton.setVisible(true);
-//            outsideButton.setVisible(true);
-//            inOutEqualButton.setVisible(true);
-            insideButton.setEnabled(true);
-            outsideButton.setEnabled(true);
-            inOutEqualButton.setEnabled(true);
+            // Makes inOut buttons visible
+            for (int inOutSize = 0; inOutSize < inOut.length; inOutSize++) {
+                inOut[inOutSize].setVisible(true);
+            }
 
-            higherButton.setEnabled(false);
-            lowerButton.setEnabled(false);
-            hiLowEqualButton.setEnabled(false);
+            // Make highLow buttons invisible
+            for (int highLowSize = 0; highLowSize < highLow.length; highLowSize++) {
+                highLow[highLowSize].setVisible(false);
+            }
         }
 
+        // Checks if user clicked in or out
         if (choice == insideButton || choice == outsideButton ||
                 choice == inOutEqualButton) {
             inOutLabel.setVisible(true);
@@ -542,20 +461,18 @@ public class GamePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null,
                     "Check if this guess is correct somehow");
 
-//            spadesButton.setVisible(true);
-//            heartsButton.setVisible(true);
-//            clubsButton.setVisible(true);
-//            diamondsButton.setVisible(true);
-            spadesButton.setEnabled(true);
-            heartsButton.setEnabled(true);
-            clubsButton.setEnabled(true);
-            diamondsButton.setEnabled(true);
+            // Make suit buttons visible
+            for (int suitSize = 0; suitSize < suits.length; suitSize++) {
+                suits[suitSize].setVisible(true);
+            }
 
-            insideButton.setEnabled(false);
-            outsideButton.setEnabled(false);
-            inOutEqualButton.setEnabled(false);
+            // Makes inOut buttons invisible
+            for (int inOutSize = 0; inOutSize < inOut.length; inOutSize++) {
+                inOut[inOutSize].setVisible(false);
+            }
         }
 
+        // Checks what suit the user picked
         if (choice == spadesButton || choice == heartsButton ||
                 choice == clubsButton || choice == diamondsButton) {
             suitLabel.setVisible(true);
@@ -563,39 +480,18 @@ public class GamePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null,
                     "Check if this guess is correct somehow");
 
-//            twoButton.setVisible(true);
-//            threeButton.setVisible(true);
-//            fourButton.setVisible(true);
-//            fiveButton.setVisible(true);
-//            sixButton.setVisible(true);
-//            sevenButton.setVisible(true);
-//            eightButton.setVisible(true);
-//            nineButton.setVisible(true);
-//            tenButton.setVisible(true);
-//            jackButton.setVisible(true);
-//            queenButton.setVisible(true);
-//            kingButton.setVisible(true);
-//            aceButton.setVisible(true);
-            twoButton.setEnabled(true);
-            threeButton.setEnabled(true);
-            fourButton.setEnabled(true);
-            fiveButton.setEnabled(true);
-            sixButton.setEnabled(true);
-            sevenButton.setEnabled(true);
-            eightButton.setEnabled(true);
-            nineButton.setEnabled(true);
-            tenButton.setEnabled(true);
-            jackButton.setEnabled(true);
-            queenButton.setEnabled(true);
-            kingButton.setEnabled(true);
-            aceButton.setEnabled(true);
+            // Make the number buttons visible
+            for (int numbersSize = 0; numbersSize < numbers.length; numbersSize++) {
+                numbers[numbersSize].setVisible(true);
+            }
 
-            spadesButton.setEnabled(false);
-            heartsButton.setEnabled(false);
-            clubsButton.setEnabled(false);
-            diamondsButton.setEnabled(false);
+            // Make suit buttons invisible
+            for (int suitSize = 0; suitSize < suits.length; suitSize++) {
+                suits[suitSize].setVisible(false);
+            }
         }
 
+        // Checks what number the user picked
         if (choice == twoButton || choice == threeButton || choice == fourButton ||
                 choice == fiveButton || choice == sixButton || choice == sevenButton ||
                 choice == eightButton || choice == nineButton || choice == tenButton ||
@@ -606,20 +502,10 @@ public class GamePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null,
                     "Check if this guess is correct somehow");
 
-            twoButton.setEnabled(false);
-            threeButton.setEnabled(false);
-            fourButton.setEnabled(false);
-            fiveButton.setEnabled(false);
-            sixButton.setEnabled(false);
-            sevenButton.setEnabled(false);
-            eightButton.setEnabled(false);
-            nineButton.setEnabled(false);
-            tenButton.setEnabled(false);
-            jackButton.setEnabled(false);
-            queenButton.setEnabled(false);
-            kingButton.setEnabled(false);
-            aceButton.setEnabled(false);
-
+            // Make the number buttons invisible
+            for (int numbersSize = 0; numbersSize < numbers.length; numbersSize++) {
+                numbers[numbersSize].setVisible(false);
+            }
         }
     }
 }
