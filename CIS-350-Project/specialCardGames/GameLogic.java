@@ -136,7 +136,7 @@ public class GameLogic{
 		else {
 			score--;
 		}
-		deck.chooseCard();
+        //deck.chooseCard(); <<<< TODO: this breaks the code
 	}
 
 	/******************************************************************
@@ -145,15 +145,24 @@ public class GameLogic{
 	 * @param loh - The player input of lower or higher in integer
 	 *               form in order to match the Deck class
 	 *****************************************************************/
-	public void lowerOrHigherScore(int loh){
+	public boolean lowerOrHigherScore(int loh){
+
+	    //variable to return the decision
+		boolean decision;
+
 		if(loh == deck.lowerOrHigher()){
 			score -= 2;
+			//the user's choice is correct
+			decision = true;
 		}
 		else{
 			score += 2;
+			//the user's choice is incorrect
+			decision = false;
 		}
 
-		deck.chooseCard();
+		//deck.chooseCard(); <<<< TODO: this breaks the code
+ 		return decision;
 	}
 
 	/******************************************************************
@@ -162,15 +171,20 @@ public class GameLogic{
 	 * @param ioo - The player input of inside or outside in integer
 	 *              form in order to match the Deck class
 	 *****************************************************************/
-	public void insideOrOutsideScore(int ioo){
+	public boolean insideOrOutsideScore(int ioo){
+
+	    boolean decision;
 		if(ioo == deck.insideOrOutside()){
 			score -= 3;
+			decision = true;
 		}
 		else{
 			score += 3;
+			decision = false;
 		}
 
-		deck.chooseCard();
+        //deck.chooseCard(); <<<< TODO: this breaks the code
+		return decision;
 	}
 
 	/******************************************************************
@@ -187,7 +201,7 @@ public class GameLogic{
 			score += 4;
 		}
 
-		deck.chooseCard();
+        //deck.chooseCard(); <<<< TODO: this breaks the code
 	}
 
 	/******************************************************************
@@ -204,7 +218,7 @@ public class GameLogic{
 			score += 10;
 		}
 
-		deck.chooseCard();
+        //deck.chooseCard(); <<<< TODO: this breaks the code
 	}
 //	/******************************************************************
 //	 * The final "level" of the game, riding the bus. This method will

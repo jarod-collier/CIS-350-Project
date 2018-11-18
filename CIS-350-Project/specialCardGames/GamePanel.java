@@ -16,7 +16,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     // Labels for all of the different cards
     private JLabel dealerLabel, redBlackLabel, highLowLabel,
-            inOutLabel, suitLabel, randomLabel, pointsLabel;
+            inOutLabel, suitLabel, randomLabel, pointsLabel, questionLabel, leaderBoard;
 
     // ImageIcons for all of the cards
     private ImageIcon dealerCard, redBlackCard, highLowCard,
@@ -48,11 +48,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
     private final int BUTTONS_X_VALUE = 1;
 
-    private final int BUTTONS_Y_VALUE = 1;
+    private final int BUTTONS_Y_VALUE = 2;
 
     private final int CARDS_X_VALUE = 0;
 
-    private final int CARDS_Y_VALUE = 0;
+    private final int CARDS_Y_VALUE = 1;
 
 
     /******************************************************************
@@ -174,36 +174,44 @@ public class GamePanel extends JPanel implements ActionListener {
         numbers[12] = aceButton;
 
         // add action listeners to the color buttons
-        for (int colorsSize = 0; colorsSize < colors.length; colorsSize++) {
-            colors[colorsSize].addActionListener(this);
+        for (JButton color : colors) {
+            color.addActionListener(this);
         }
         // Add action listeners to the highLow buttons
-        for (int highLowSize = 0; highLowSize < highLow.length; highLowSize++) {
-            highLow[highLowSize].addActionListener(this);
+        for (JButton aHighLow : highLow) {
+            aHighLow.addActionListener(this);
         }
 
         // Add action listeners to the inOut buttons
-        for (int inOutSize = 0; inOutSize < inOut.length; inOutSize++) {
-            inOut[inOutSize].addActionListener(this);
+        for (JButton anInOut : inOut) {
+            anInOut.addActionListener(this);
         }
 
         // Add action listeners to the suit buttons
-        for (int suitSize = 0; suitSize < suits.length; suitSize++) {
-            suits[suitSize].addActionListener(this);
+        for (JButton suit : suits) {
+            suit.addActionListener(this);
         }
 
         // Add action listeners to the number buttons
-        for (int numbersSize = 0; numbersSize < numbers.length; numbersSize++) {
-            numbers[numbersSize].addActionListener(this);
+        for (JButton number : numbers) {
+            number.addActionListener(this);
         }
 
         //initialize the points label
         pointsLabel = new JLabel("Players points: " + logic.getScore());
         pointsLabel.setFont(new Font("Cooper Black", Font.BOLD, 30));
 
+        //initialize the question label
+        questionLabel = new JLabel("What's the color of the card?");
+        questionLabel.setFont(new Font ("Cooper Black", Font.BOLD, 40));
+        questionLabel.setForeground(Color.RED);
+
+        //initialize the leader board
+        leaderBoard = new JLabel("Leader Board is here");
+
         // Create one JPanel for the first stage of the game
         JPanel firstStage = new JPanel(new GridBagLayout());
-//        firstStage.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        firstStage.setPreferredSize(new Dimension(screenWidth, screenHeight/2));
 
         // --------------------------------------------------------------------------------
 
@@ -362,17 +370,31 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // --------------------------------------------------------------------------------
 
-        // Add the points label to the panel in line with cards
-        c.gridx = BUTTONS_X_VALUE + 8;
-        c.gridy = CARDS_Y_VALUE;
-        firstStage.add(pointsLabel, c);
+        JPanel pointsPanel = new JPanel();
+        pointsPanel.add(pointsLabel);
 
-        //make the panel transparent
-        firstStage.setOpaque(false);
+        JPanel questionPanel = new JPanel();
+        questionPanel.add(questionLabel);
 
-        // Place the panel in the frame
+        JPanel leaderBoardPanel = new JPanel();
+        leaderBoardPanel.add(leaderBoard);
+
+        // Add the question label to the main panel
+        add(questionPanel, BorderLayout.PAGE_START);
+
+        //add the cards panel to the main panel
         add(firstStage, BorderLayout.CENTER);
-//        add(firstStage);
+
+        //add the leaderBoard label to the main panel
+//        add(leaderBoardPanel, BorderLayout.AFTER_LAST_LINE);
+
+        //add the points label to the main panel
+        add(pointsPanel, BorderLayout.PAGE_END);
+
+        //make all the panels transparent
+        firstStage.setOpaque(false);
+        questionPanel.setOpaque(false);
+        pointsPanel.setOpaque(false);
 
         //get the image from the directory
         changeImage();
@@ -418,77 +440,167 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Checks if user clicks on red or black
         if (choice == redButton || choice == blackButton) {
-            redBlackLabel.setVisible(true);
 
-            JOptionPane.showMessageDialog(null,
-                    "Check if this guess is correct somehow");
+            char cardColor;
 
-            // Make highLow buttons visible
-            for (int highLowSize = 0; highLowSize < highLow.length; highLowSize++) {
-                highLow[highLowSize].setVisible(true);
+            //check if the card is not a 10, which will increase the length
+            if(logic.cardString(1).length() == 23) {
+
+                //get color char from the path
+                cardColor = (logic.cardString(1)).charAt(18);
+
+            }else{
+
+                cardColor = (logic.cardString(1)).charAt(19);
             }
 
             // Make color buttons invisible
-            for (int colorsSize = 0; colorsSize < colors.length; colorsSize++) {
-                colors[colorsSize].setVisible(false);
+            for (JButton color : colors) {
+                color.setVisible(false);
             }
+
+            redBlackLabel.setVisible(true);
+
+            if((choice == redButton && (cardColor == 'D' || cardColor == 'H')) ||
+                    (choice == blackButton && (cardColor == 'S' || cardColor == 'C'))) {
+                JOptionPane.showMessageDialog(null,
+                        "You got it right!");
+            }else{
+                JOptionPane.showMessageDialog(null,
+                        "Ouch!");
+            }
+
+            // Make highLow buttons visible
+            for (JButton aHighLow : highLow) {
+                aHighLow.setVisible(true);
+            }
+
+            //change the question
+            questionLabel.setText("Higher or lower than the previous card?");
         }
 
         // Checks if user clicked higher or lower
         if (choice == higherButton || choice == lowerButton ||
                 choice == hiLowEqualButton) {
+
             highLowLabel.setVisible(true);
 
-            JOptionPane.showMessageDialog(null,
-                    "Check if this guess is correct somehow");
+            //variable to pass the choice to the logic
+            int userChoice;
 
-            // Makes inOut buttons visible
-            for (int inOutSize = 0; inOutSize < inOut.length; inOutSize++) {
-                inOut[inOutSize].setVisible(true);
-            }
+            //read the user's choice and assign the correct value
+            // to compare it
+            if(choice == higherButton) userChoice = -1;
+            else if(choice == lowerButton) userChoice = 1;
+            else userChoice = 0;
+
 
             // Make highLow buttons invisible
-            for (int highLowSize = 0; highLowSize < highLow.length; highLowSize++) {
-                highLow[highLowSize].setVisible(false);
+            for (JButton aHighLow : highLow) {
+                aHighLow.setVisible(false);
             }
+
+            if(logic.lowerOrHigherScore(userChoice)){
+                JOptionPane.showMessageDialog(null,
+                        "Correct");
+            }else{
+                JOptionPane.showMessageDialog(null,
+                        "Ouch");
+            }
+
+
+            // Makes inOut buttons visible
+            for (JButton anInOut : inOut) {
+                anInOut.setVisible(true);
+            }
+
+            //change the question
+            questionLabel.setText("Inside or outside the previous two cards?");
+
         }
 
         // Checks if user clicked in or out
         if (choice == insideButton || choice == outsideButton ||
                 choice == inOutEqualButton) {
+
             inOutLabel.setVisible(true);
 
-            JOptionPane.showMessageDialog(null,
-                    "Check if this guess is correct somehow");
+            int userchoice;
 
-            // Make suit buttons visible
-            for (int suitSize = 0; suitSize < suits.length; suitSize++) {
-                suits[suitSize].setVisible(true);
-            }
+            if(choice == insideButton) userchoice = 1;
+            else if(choice == outsideButton) userchoice = -1;
+            else userchoice = 0;
 
             // Makes inOut buttons invisible
-            for (int inOutSize = 0; inOutSize < inOut.length; inOutSize++) {
-                inOut[inOutSize].setVisible(false);
+            for (JButton anInOut : inOut) {
+                anInOut.setVisible(false);
             }
+
+            if(logic.insideOrOutsideScore(userchoice)){
+
+                JOptionPane.showMessageDialog(null,
+                        "Correct");
+            }else{
+                JOptionPane.showMessageDialog(null,
+                        "Ouch");
+            }
+
+
+
+            // Make suit buttons visible
+            for (JButton suit : suits) {
+                suit.setVisible(true);
+            }
+
+            //change the question
+            questionLabel.setText("What's the suit of the card?");
         }
 
         // Checks what suit the user picked
         if (choice == spadesButton || choice == heartsButton ||
                 choice == clubsButton || choice == diamondsButton) {
+
             suitLabel.setVisible(true);
 
-            JOptionPane.showMessageDialog(null,
-                    "Check if this guess is correct somehow");
+            // Make suit buttons invisible
+            for (JButton suit : suits) {
+                suit.setVisible(false);
+            }
+
+
+
+            char userChoice;
+
+            //check if the card is not a 10, which will increase the length
+            if(logic.cardString(1).length() == 23) {
+
+                //get color char from the path
+                userChoice = (logic.cardString(4)).charAt(18);
+
+            }else{
+
+                userChoice = (logic.cardString(4)).charAt(19);
+            }
+
+            if((choice == diamondsButton && userChoice == 'D') ||
+                    (choice == heartsButton && userChoice == 'H')||
+                    (choice == clubsButton && userChoice == 'C') ||
+                    (choice == spadesButton && userChoice == 'S')){
+
+                JOptionPane.showMessageDialog(null,
+                        "You got it right!");
+            }else{
+                JOptionPane.showMessageDialog(null,
+                        "Ouch!");
+            }
 
             // Make the number buttons visible
-            for (int numbersSize = 0; numbersSize < numbers.length; numbersSize++) {
-                numbers[numbersSize].setVisible(true);
+            for (JButton number : numbers) {
+                number.setVisible(true);
             }
 
-            // Make suit buttons invisible
-            for (int suitSize = 0; suitSize < suits.length; suitSize++) {
-                suits[suitSize].setVisible(false);
-            }
+            //change the question
+            questionLabel.setText("What's the value of the card?");
         }
 
         // Checks what number the user picked
@@ -497,15 +609,66 @@ public class GamePanel extends JPanel implements ActionListener {
                 choice == eightButton || choice == nineButton || choice == tenButton ||
                 choice == jackButton || choice == queenButton || choice == kingButton ||
                 choice == aceButton) {
+
             randomLabel.setVisible(true);
 
-            JOptionPane.showMessageDialog(null,
-                    "Check if this guess is correct somehow");
-
             // Make the number buttons invisible
-            for (int numbersSize = 0; numbersSize < numbers.length; numbersSize++) {
-                numbers[numbersSize].setVisible(false);
+            for (JButton number : numbers) {
+                number.setVisible(false);
             }
+
+            //get the user's choice
+            String userChoice;
+
+            if(choice == twoButton) userChoice = "2";
+            else if(choice == threeButton) userChoice = "3";
+            else if(choice == fourButton) userChoice = "4";
+            else if(choice == fiveButton) userChoice = "5";
+            else if(choice == sixButton) userChoice = "6";
+            else if(choice == sevenButton) userChoice = "7";
+            else if(choice == eightButton) userChoice = "8";
+            else if(choice == nineButton) userChoice = "9";
+            else if(choice == tenButton) userChoice = "10";
+            else if(choice == jackButton) userChoice = "J";
+            else if(choice == queenButton) userChoice = "Q";
+            else if(choice == kingButton) userChoice = "K";
+            else if(choice == aceButton) userChoice = "A";
+            else userChoice = "Something happened";
+
+            //get card value from path of the card
+
+            String cardValue;
+
+            //check if the card is not a 10, which will increase the length
+            if(logic.cardString(5).length() == 23) {
+
+                //get color char from the path
+                cardValue = logic.cardString(5).substring(17,18);
+
+            }else {
+
+                cardValue = (logic.cardString(5)).substring(17, 17);
+            }
+
+            if(cardValue.equals(userChoice)){
+                JOptionPane.showMessageDialog(null,
+                        "Awesome!!!");
+            }else{
+                JOptionPane.showMessageDialog(null,
+                        "Damn it!");
+            }
+
+            //change the question
+            questionLabel.setText("The first stage is done. Wait a second");
+
+            //sleep for 5 seconds
+            try {
+                Thread.sleep(5000);
+            }catch (InterruptedException e1){
+                System.out.println("The time got interrupted");
+            }
+
+            JOptionPane.showMessageDialog(null,"Time for stage 2!");
         }
     }
 }
