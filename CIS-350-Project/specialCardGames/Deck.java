@@ -283,6 +283,7 @@ public class Deck {
     public int chooseCard() {
 
         // Checks if the deck is empty
+        //TODO: this breaks everytime
         if (emptyDeck())
             throw new IllegalArgumentException("Deck is empty");
 
@@ -358,6 +359,8 @@ public class Deck {
      *****************************************************************/
     public int insideOrOutside() {
 
+        //TODO: THIS DOESN'T WORK :: it only recognize if the value is smaller
+
         int first = chosenCards.get(chosenCards.size() - 3);
         int second = chosenCards.get(chosenCards.size() - 2);
         int third = chosenCards.get(chosenCards.size() - 1);
@@ -389,6 +392,8 @@ public class Deck {
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
     public boolean guessSuit(int guessSuit) {
+
+        //TODO: THIS WONT WORK!!!!
 
         // Makes sure there is a card to guess the suit from
         if (chosenCards.size() >= 1) {
