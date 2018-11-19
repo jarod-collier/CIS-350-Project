@@ -670,5 +670,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
             JOptionPane.showMessageDialog(null,"Time for stage 2!");
         }
+        pointsLabel.setText("Players points: " + logic.getScore());
     }
 }
