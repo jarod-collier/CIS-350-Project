@@ -72,9 +72,6 @@ public class GamePanel extends JPanel implements ActionListener {
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 
-        System.out.println(screenHeight);
-        System.out.println(screenWidth);
-
         //set preferred size to the size of the screen
         setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
 
@@ -465,6 +462,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     (choice == blackButton && (cardColor == 'S' || cardColor == 'C'))) {
                 JOptionPane.showMessageDialog(null,
                         "You got it right!");
+
             }else{
                 JOptionPane.showMessageDialog(null,
                         "Ouch!");
