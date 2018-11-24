@@ -90,7 +90,7 @@ public class Deck {
         System.out.println(d.insideOrOutside());
         System.out.println(d.guessSuit(2));
         System.out.println(d.guessCard(7));
-        System.out.println(d.checkFaceCard());
+        System.out.println(d.checkFaceCard(1));
     }
 
 
@@ -361,15 +361,18 @@ public class Deck {
 
         //TODO: THIS DOESN'T WORK :: it only recognize if the value is smaller
 
-        int first = chosenCards.get(chosenCards.size() - 3);
-        int second = chosenCards.get(chosenCards.size() - 2);
-        int third = chosenCards.get(chosenCards.size() - 1);
+        int first = getCardFromBack(1);
+        int second = getCardFromBack(2);
+        int third = getCardFromBack( 3);
+
+        System.out.println(first + " " + second + " " + third);
 
         // Checks if at least 3 cards have been chosen to compare
         if (chosenCards.size() > 2) {
 
             // checks if recent card's value is inside others
-            if (third > first && third < second)
+            if ((third > first && third < second) ||
+                    third > second && third < first)
                 return -1;
 
                 // checks if recent card's value is outside others
@@ -436,19 +439,19 @@ public class Deck {
      * @return true or false if card is a face card
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
-    public boolean checkFaceCard() {
+    public int checkFaceCard(int cardFromBack) {
 
         // Makes sure there is a card to guess from
         if (chosenCards.size() >= 1) {
 
             // Checks if card has value of a face card
-            if (getCardFromBack(1) == 11 ||
-                    getCardFromBack(1) == 12
-                    || getCardFromBack(1) == 13
-                    || getCardFromBack(1) == 14)
-                return true;
+            if (getCardFromBack(cardFromBack) == 11 ||
+                    getCardFromBack(cardFromBack) == 12
+                    || getCardFromBack(cardFromBack) == 13
+                    || getCardFromBack(cardFromBack) == 14)
+                return getCardFromBack(cardFromBack);
             else
-                return false;
+                return 0;
         } else
             throw new IllegalArgumentException("Must pick a card");
     }
@@ -491,7 +494,7 @@ public class Deck {
             }
         }
 
-        // If there are no available cards, return return
+        // If there are no available cards, return true
         if (count == SUITS * VALUES)
             return true;
         else
