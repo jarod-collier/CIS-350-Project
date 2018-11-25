@@ -119,7 +119,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Create one JPanel for the second stage of the game
         secondStage = new JPanel(new GridBagLayout());
-        secondStage.setPreferredSize(new Dimension(screenWidth, screenHeight - 300));
+        secondStage.setPreferredSize(new Dimension(screenWidth, screenHeight - 250));
 
         // Sets layout of how cards are set
         GridBagConstraints c = new GridBagConstraints();
@@ -141,6 +141,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Adding the points label to the points panel
         pointsPanel = new JPanel();
+        pointsPanel.setPreferredSize(new Dimension(screenWidth, screenHeight / 6));
         pointsPanel.add(pointsLabel);
 
         // Adding the question label to the question panel
@@ -870,10 +871,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -926,10 +931,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -978,10 +987,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1017,10 +1030,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1076,10 +1093,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1114,10 +1135,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1168,10 +1193,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1206,10 +1235,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1244,10 +1277,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
                     return;
                 }
             } else {
@@ -1302,10 +1339,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1339,10 +1380,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1377,10 +1422,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1430,11 +1479,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
-
+                        downButtons.setEnabled(true);
+                    }
                     return;
                 }
             } else if (thirdCol2) {
@@ -1467,10 +1519,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1505,10 +1561,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1559,10 +1619,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1596,11 +1660,15 @@ public class GamePanel extends JPanel implements ActionListener {
                                 "You ran out of cards!");
                     }
 
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    // Make buttons disappear and make them all enabled
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1634,10 +1702,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1686,10 +1758,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1723,10 +1799,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1775,10 +1855,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1812,10 +1896,14 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
 
                     // Make buttons disappear
-                    for (JButton upButtons : upPath)
+                    for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
-                    for (JButton downButtons : downPath)
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
                         downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
 
                     return;
                 }
@@ -1861,10 +1949,14 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
                 // Make buttons disappear
-                for (JButton upButtons : upPath)
+                for (JButton upButtons : upPath) {
                     upButtons.setVisible(false);
-                for (JButton downButtons : downPath)
+                    upButtons.setEnabled(true);
+                }
+                for (JButton downButtons : downPath) {
                     downButtons.setVisible(false);
+                    downButtons.setEnabled(true);
+                }
 
             } else {
 
@@ -1909,10 +2001,14 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
                 // Make buttons disappear
-                for (JButton upButtons : upPath)
+                for (JButton upButtons : upPath) {
                     upButtons.setVisible(false);
-                for (JButton downButtons : downPath)
+                    upButtons.setEnabled(true);
+                }
+                for (JButton downButtons : downPath) {
                     downButtons.setVisible(false);
+                    downButtons.setEnabled(true);
+                }
 
             } else {
 
