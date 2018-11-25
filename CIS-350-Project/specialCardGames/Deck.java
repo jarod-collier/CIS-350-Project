@@ -359,8 +359,6 @@ public class Deck {
      *****************************************************************/
     public int insideOrOutside() {
 
-        //TODO: THIS DOESN'T WORK :: it only recognize if the value is smaller
-
         int first = getCardFromBack(1);
         int second = getCardFromBack(2);
         int third = getCardFromBack( 3);

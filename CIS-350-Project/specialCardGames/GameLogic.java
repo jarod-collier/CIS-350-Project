@@ -260,20 +260,46 @@ public class GameLogic {
     }
 
     /******************************************************************
-     * The final "level" of the game, riding the bus. This method will
-     * be repeatedly called by the gui, if the player picks a face card
-     * they have to re-ride the bus. This just checks if the
+     * Checks the path of the pictures if they are a face card
+     * @param path - the path of the card
+     * @return true or false whether the card is a face card
      *****************************************************************/
-    public boolean checkFaceCardScore(int card) {
-        if (deck.checkFaceCard(card) == 11 ||
-                deck.checkFaceCard(card) == 12 ||
-                deck.checkFaceCard(card) == 13 ||
-                deck.checkFaceCard(card) == 14) {
-            score += 1;    //TODO change score correctly
-            return true;
+    public boolean checkPathFaceCard(String path) {
 
+        String cardPath[] = path.split("/");
+
+        String ending = cardPath[cardPath.length - 1];
+
+        System.out.println(ending);
+
+        // Gets the cards value from the path
+        char cardValue = (ending.charAt(0));
+
+        // Checks if the card value is a face card, if it is change the score
+        if (cardValue == 'J') {
+            score += 1;
+            return true;
+        } else if (cardValue == 'Q') {
+            score += 2;
+            return true;
+        } else if (cardValue == 'K') {
+            score += 3;
+            return true;
+        } else if (cardValue == 'A') {
+            score += 4;
+            return true;
         } else {
             return false;
         }
+    }
+
+    /******************************************************************
+     * Creates another deck for the second phase of the game
+     *****************************************************************/
+    public void createNewDeck() {
+        deck = new Deck();
+
+        for (int amountOfCards = 0; amountOfCards < 52; amountOfCards++)
+            deck.chooseCard();
     }
 }
