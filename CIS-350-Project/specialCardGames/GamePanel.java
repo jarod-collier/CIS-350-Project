@@ -119,7 +119,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Create one JPanel for the second stage of the game
         secondStage = new JPanel(new GridBagLayout());
-        secondStage.setPreferredSize(new Dimension(screenWidth, screenHeight - 250));
+        secondStage.setPreferredSize(new Dimension(screenWidth, screenHeight - 200));
 
         // Sets layout of how cards are set
         GridBagConstraints c = new GridBagConstraints();
@@ -141,7 +141,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Adding the points label to the points panel
         pointsPanel = new JPanel();
-        pointsPanel.setPreferredSize(new Dimension(screenWidth, screenHeight / 6));
+        pointsPanel.setPreferredSize(new Dimension(screenWidth, screenHeight / 8));
         pointsPanel.add(pointsLabel);
 
         // Adding the question label to the question panel
