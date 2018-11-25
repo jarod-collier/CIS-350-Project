@@ -69,6 +69,8 @@ public class GamePanel extends JPanel implements ActionListener {
     private boolean secondCol1, secondCol2, thirdCol1, thirdCol2, thirdCol3, fourthCol1, fourthCol2,
             fourthCol3, fourthCol4, fifthCol1, fifthCol2, fifthCol3, sixthCol1, sixthCol2, seventhCol;
 
+    private boolean[] pathWays;
+
     // Keeps track of cards used for second stage
     private int placeInDeck;
 
@@ -337,8 +339,6 @@ public class GamePanel extends JPanel implements ActionListener {
         c.gridy = Y_CARD_POSITION + 5;
         secondStage.add(chosenPathLow6, c);
         chosenPathLow6.setVisible(false);
-
-        // ------------------------------------------------------------------------------
     }
 
     private void secondStageCreations() {
@@ -450,6 +450,9 @@ public class GamePanel extends JPanel implements ActionListener {
         flip = new JButton("Flip Card");
         flip.addActionListener(this);
 
+        // Create boolean array to hold second stage paths
+        pathWays = new boolean[15];
+
         // Start with booleans as false for second stage paths
         secondCol1 = false;
         secondCol2 = false;
@@ -466,6 +469,23 @@ public class GamePanel extends JPanel implements ActionListener {
         sixthCol1 = false;
         sixthCol2 = false;
         seventhCol = false;
+
+        pathWays[0] = secondCol1;
+        pathWays[1] = secondCol2;
+        pathWays[2] = thirdCol1;
+        pathWays[3] = thirdCol2;
+        pathWays[4] = thirdCol3;
+        pathWays[5] = fourthCol1;
+        pathWays[6] = fourthCol2;
+        pathWays[7] = fourthCol3;
+        pathWays[8] = fourthCol4;
+        pathWays[9] = fifthCol1;
+        pathWays[10] = fifthCol2;
+        pathWays[11] = fifthCol3;
+        pathWays[12] = sixthCol1;
+        pathWays[13] = sixthCol2;
+        pathWays[14] = seventhCol;
+
     }
 
     private void stageOneButtonsAndLabels() {
@@ -797,173 +817,211 @@ public class GamePanel extends JPanel implements ActionListener {
         // Checks what number the user picked
         clickingNumber(choice);
 
-        // Clicking the flip button  -----------------------------------------------------------------------
+        // Clicking the flip button
         clickingFlip(choice);
 
-        // Clicking higher in the first column -----------------------------------------------------------------------
+        // Clicking higher in the first column
         clickingHigherColumn1(choice);
 
-        // Clicking lower in the first column -----------------------------------------------------------------------
+        // Clicking lower in the first column
         clickingLowerColumn1(choice);
 
-        // Clicking higher in the second column -----------------------------------------------------------------------
+        // Clicking higher in the second column
         clickingHigherColumn2(choice);
 
-        // Clicking lower in the second column -----------------------------------------------------------------------
+        // Clicking lower in the second column
         clickingLowerColumn2(choice);
 
-        // Clicking higher in the third column -----------------------------------------------------------------------
+        // Clicking higher in the third column
         clickingHigherColumn3(choice);
 
-        // Clicking lower in the third column -----------------------------------------------------------------------
+        // Clicking lower in the third column
         clickingLowerColumn3(choice);
 
-        // Clicking higher in the fourth column -----------------------------------------------------------------------
+        // Clicking higher in the fourth column
         clickingHigherColumn4(choice);
 
-        // Clicking lower in the fourth column -----------------------------------------------------------------------
+        // Clicking lower in the fourth column
         clickingLowerColumn4(choice);
 
-        // Clicking higher in the fifth column -----------------------------------------------------------------------
+        // Clicking higher in the fifth column
         clickingHigherColumn5(choice);
 
-        // Clicking lower in the fifth column -----------------------------------------------------------------------
+        // Clicking lower in the fifth column
         clickingLowerColumn5(choice);
 
-        // Clicking higher in the sixth column -----------------------------------------------------------------------
+        // Clicking higher in the sixth column
         clickingHigherColumn6(choice);
 
-        // Clicking lower in the sixth column -----------------------------------------------------------------------
+        // Clicking lower in the sixth column
         clickingLowerColumn6(choice);
     }
 
-    private void clickingLowerColumn6(Object choice) {
-        if (choice == chosenPathLow6) {
+    private void clickingFlip(Object choice) {
+        if (choice == flip) {
 
-            // Change card visibility
-            if (sixthCol1) {
-                blankCards[SEVENTH_COLUMN].setVisible(false);
-                sixthCol1 = false;
-                seventhCol = true;
+            // Change Card Visibility
+            blankCards[FIRST_COLUMN].setVisible(false);
 
-                // Checks for face card from preplaced card
-                if (logic.checkPathFaceCard(seventhColumn.toString())) {
+            // Checks for face card
+            if (logic.checkPathFaceCard(firstColumn.toString())) {
 
+                JOptionPane.showMessageDialog(this,
+                        "Yikes, face card! Restart!");
+
+                // Cover the face card up
+                blankCards[FIRST_COLUMN].setVisible(true);
+                flip.setEnabled(true);
+
+                // Change the value of the face card
+                firstColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                cards[FIRST_COLUMN].setIcon(firstColumn);
+
+                // Go to the next card in the deck
+                if (placeInDeck <= 52) {
+                    placeInDeck++;
+                } else {
                     JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[SEVENTH_COLUMN].setIcon(seventhColumn);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
-
-                    return;
-                }
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "You can't go down");
-            }
-
-            // If there aren't any face cards, then continue
-            // Change Button Visibility
-            chosenPathHigh6.setVisible(false);
-            chosenPathLow6.setVisible(false);
-        }
-    }
-
-    private void clickingHigherColumn6(Object choice) {
-        if (choice == chosenPathHigh6) {
-
-            // Change card visibility
-            if (sixthCol1) {
-                JOptionPane.showMessageDialog(null,
-                        "You can't go up");
-            } else {
-                blankCards[SEVENTH_COLUMN].setVisible(false);
-                sixthCol2 = false;
-                seventhCol = true;
-
-                // Checks for face card from preplaced card
-                if (logic.checkPathFaceCard(seventhColumn.toString())) {
-
-                    JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[SEVENTH_COLUMN].setIcon(seventhColumn);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
-
-                    return;
+                            "You ran out of cards!");
                 }
             }
 
             // If there aren't any face cards, then continue
-            // Change Button Visibility
-            chosenPathHigh6.setVisible(false);
-            chosenPathLow6.setVisible(false);
+            else {
 
+                // Change Button Visibility
+                flip.setEnabled(false);
+                chosenPathHigh1.setVisible(true);
+                chosenPathLow1.setVisible(true);
+            }
         }
     }
 
-    private void clickingLowerColumn5(Object choice) {
-        if (choice == chosenPathLow5) {
+    private void clickingHigherColumn1(Object choice) {
+        if (choice == chosenPathHigh1) {
+
+            // Change Card Visibility
+            blankCards[SECOND_COLUMN_1].setVisible(false);
+
+            // Checks for face card
+            if (logic.checkPathFaceCard(secondColumn1.toString())) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Yikes, face card! Restart!");
+
+                // Cover the face card up
+                for (JLabel blankCard : blankCards) {
+                    blankCard.setVisible(true);
+                }
+                flip.setEnabled(true);
+
+                // Change the value of the face card
+                secondColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                cards[SECOND_COLUMN_1].setIcon(secondColumn1);
+
+                // Go to the next card in the deck
+                if (placeInDeck <= 52) {
+                    placeInDeck++;
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "You ran out of cards!");
+                }
+
+                // Make buttons disappear
+                for (JButton upButtons : upPath) {
+                    upButtons.setVisible(false);
+                    upButtons.setEnabled(true);
+                }
+                for (JButton downButtons : downPath) {
+                    downButtons.setVisible(false);
+                    downButtons.setEnabled(true);
+                }
+
+                // Reset pathways
+                for (Boolean paths : pathWays)
+                    paths = false;
+
+                return;
+            } else {
+
+                // Change Button Visibility
+                chosenPathHigh2.setVisible(true);
+                chosenPathLow2.setVisible(true);
+                chosenPathHigh1.setVisible(false);
+                chosenPathLow1.setVisible(false);
+                secondCol1 = true;
+            }
+        }
+    }
+    private void clickingLowerColumn1(Object choice) {
+        if (choice == chosenPathLow1) {
 
             // Change card visibility
-            if (fifthCol1) {
-                blankCards[SIXTH_COLUMN_1].setVisible(false);
-                fifthCol1 = false;
-                sixthCol1 = true;
-                chosenPathHigh6.setEnabled(false);
+            blankCards[SECOND_COLUMN_2].setVisible(false);
+
+            // Checks for face card
+            if (logic.checkPathFaceCard(secondColumn2.toString())) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Yikes, face card! Restart!");
+
+                // Cover the face card up
+                for (JLabel blankCard : blankCards) {
+                    blankCard.setVisible(true);
+                }
+                flip.setEnabled(true);
+
+                // Change the value of the face card
+                secondColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                cards[SECOND_COLUMN_2].setIcon(secondColumn2);
+
+                // Go to the next card in the deck
+                if (placeInDeck <= 52) {
+                    placeInDeck++;
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "You ran out of cards!");
+                }
+
+                // Make buttons disappear
+                for (JButton upButtons : upPath) {
+                    upButtons.setVisible(false);
+                    upButtons.setEnabled(true);
+                }
+                for (JButton downButtons : downPath) {
+                    downButtons.setVisible(false);
+                    downButtons.setEnabled(true);
+                }
+
+                // Reset pathways
+                for (Boolean paths : pathWays)
+                    paths = false;
+
+                return;
+
+            } else {
+
+                // Change Button Visibility
+                chosenPathHigh2.setVisible(true);
+                chosenPathLow2.setVisible(true);
+                chosenPathHigh1.setVisible(false);
+                chosenPathLow1.setVisible(false);
+                secondCol2 = true;
+            }
+        }
+    }
+
+    private void clickingHigherColumn2(Object choice) {
+        if (choice == chosenPathHigh2) {
+
+            // Change card visibility
+            if (secondCol1) {
+                blankCards[THIRD_COLUMN_1].setVisible(false);
+                secondCol1 = false;
+                thirdCol1 = true;
 
                 // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(sixthColumn1.toString())) {
+                if (logic.checkPathFaceCard(thirdColumn1.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -975,8 +1033,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[SIXTH_COLUMN_1].setIcon(sixthColumn1);
+                    thirdColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[THIRD_COLUMN_1].setIcon(thirdColumn1);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -996,80 +1054,79 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setEnabled(true);
                     }
 
-                    return;
-                }
-
-            } else if (fifthCol2) {
-                blankCards[SIXTH_COLUMN_2].setVisible(false);
-                fifthCol2 = false;
-                sixthCol2 = true;
-                chosenPathLow6.setEnabled(false);
-
-                // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(sixthColumn2.toString())) {
-
-                    JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[SIXTH_COLUMN_2].setIcon(sixthColumn2);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "You can't go down");
-            }
+                blankCards[THIRD_COLUMN_2].setVisible(false);
+                secondCol2 = false;
+                thirdCol2 = true;
 
+                // Check for face card in newly placed card
+                if (logic.checkPathFaceCard(thirdColumn2.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[THIRD_COLUMN_2].setIcon(thirdColumn2);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
+            }
             // If there aren't any face cards, then continue
+
             // Change Button Visibility
-            chosenPathHigh6.setVisible(true);
-            chosenPathLow6.setVisible(true);
-            chosenPathHigh5.setVisible(false);
-            chosenPathLow5.setVisible(false);
+            chosenPathHigh3.setVisible(true);
+            chosenPathLow3.setVisible(true);
+            chosenPathHigh2.setVisible(false);
+            chosenPathLow2.setVisible(false);
         }
     }
 
-    private void clickingHigherColumn5(Object choice) {
-        if (choice == chosenPathHigh5) {
+    private void clickingLowerColumn2(Object choice) {
+        if (choice == chosenPathLow2) {
 
             // Change card visibility
-            if (fifthCol1) {
-                JOptionPane.showMessageDialog(null,
-                        "You can't go up");
-            } else if (fifthCol2) {
-                blankCards[SIXTH_COLUMN_1].setVisible(false);
-                fifthCol2 = false;
-                sixthCol1 = true;
-                chosenPathHigh6.setEnabled(false);
+            if (secondCol1) {
+                blankCards[THIRD_COLUMN_2].setVisible(false);
+                secondCol1 = false;
+                thirdCol2 = true;
 
                 // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(sixthColumn1.toString())) {
+                if (logic.checkPathFaceCard(thirdColumn2.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1081,8 +1138,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[SIXTH_COLUMN_1].setIcon(sixthColumn1);
+                    thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[THIRD_COLUMN_2].setIcon(thirdColumn2);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1101,17 +1158,20 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
             } else {
-                blankCards[SIXTH_COLUMN_2].setVisible(false);
-                fifthCol3 = false;
-                sixthCol2 = true;
-                chosenPathLow6.setEnabled(false);
+                blankCards[THIRD_COLUMN_3].setVisible(false);
+                secondCol2 = false;
+                thirdCol3 = true;
 
                 // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(sixthColumn2.toString())) {
+                if (logic.checkPathFaceCard(thirdColumn3.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1123,8 +1183,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[SIXTH_COLUMN_2].setIcon(sixthColumn2);
+                    thirdColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[THIRD_COLUMN_3].setIcon(thirdColumn3);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1143,6 +1203,10 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
@@ -1150,25 +1214,25 @@ public class GamePanel extends JPanel implements ActionListener {
 
             // If there aren't any face cards, then continue
             // Change Button Visibility
-            chosenPathHigh6.setVisible(true);
-            chosenPathLow6.setVisible(true);
-            chosenPathHigh5.setVisible(false);
-            chosenPathLow5.setVisible(false);
+            chosenPathHigh3.setVisible(true);
+            chosenPathLow3.setVisible(true);
+            chosenPathHigh2.setVisible(false);
+            chosenPathLow2.setVisible(false);
         }
     }
 
-    private void clickingLowerColumn4(Object choice) {
-        if (choice == chosenPathLow4) {
+    private void clickingHigherColumn3(Object choice) {
+        if (choice == chosenPathHigh3) {
 
             // Change card visibility
-            if (fourthCol1) {
-                blankCards[FIFTH_COLUMN_1].setVisible(false);
-                fourthCol1 = false;
-                fifthCol1 = true;
-                chosenPathHigh5.setEnabled(false);
+            if (thirdCol1) {
+                blankCards[FOURTH_COLUMN_1].setVisible(false);
+                thirdCol1 = false;
+                fourthCol1 = true;
+                chosenPathHigh4.setEnabled(false);
 
                 // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(fifthColumn1.toString())) {
+                if (logic.checkPathFaceCard(fourthColumn1.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1180,9 +1244,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fifthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FIFTH_COLUMN_1].setIcon(fifthColumn1);
-                    secondStage.revalidate();
+                    fourthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FOURTH_COLUMN_1].setIcon(fourthColumn1);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1201,17 +1264,21 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
 
-            } else if (fourthCol2) {
-                blankCards[FIFTH_COLUMN_2].setVisible(false);
-                fourthCol2 = false;
-                fifthCol2 = true;
+            } else if (thirdCol2) {
+                blankCards[FOURTH_COLUMN_2].setVisible(false);
+                thirdCol2 = false;
+                fourthCol2 = true;
 
                 // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(fifthColumn2.toString())) {
+                if (logic.checkPathFaceCard(fourthColumn2.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1223,8 +1290,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fifthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FIFTH_COLUMN_2].setIcon(fifthColumn2);
+                    fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FOURTH_COLUMN_2].setIcon(fourthColumn2);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1234,7 +1301,7 @@ public class GamePanel extends JPanel implements ActionListener {
                                 "You ran out of cards!");
                     }
 
-                    // Make buttons disappear
+                    // Make buttons disappear and make them all enabled
                     for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
                         upButtons.setEnabled(true);
@@ -1244,60 +1311,217 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setEnabled(true);
                     }
 
-                    return;
-                }
-            } else if (fourthCol3) {
-                blankCards[FIFTH_COLUMN_3].setVisible(false);
-                fourthCol3 = false;
-                fifthCol3 = true;
-                chosenPathLow5.setEnabled(false);
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
-                // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(fifthColumn3.toString())) {
-
-                    JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    fifthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FIFTH_COLUMN_3].setIcon(fifthColumn3);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
                     return;
                 }
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "You can't go down");
+                blankCards[FOURTH_COLUMN_3].setVisible(false);
+                thirdCol3 = false;
+                fourthCol3 = true;
+
+                // Check for face card in newly placed card
+                if (logic.checkPathFaceCard(fourthColumn3.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FOURTH_COLUMN_3].setIcon(fourthColumn3);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
+            }
+            // If there aren't any face cards, then continue
+            // Change Button Visibility
+            chosenPathHigh4.setVisible(true);
+            chosenPathLow4.setVisible(true);
+            chosenPathHigh3.setVisible(false);
+            chosenPathLow3.setVisible(false);
+
+        }
+    }
+
+    private void clickingLowerColumn3(Object choice) {
+        if (choice == chosenPathLow3) {
+
+            // Change card visibility
+            if (thirdCol1) {
+                blankCards[FOURTH_COLUMN_2].setVisible(false);
+                thirdCol1 = false;
+                fourthCol2 = true;
+
+                // Checks for face card from the preplaced card
+                if (logic.checkPathFaceCard(fourthColumn2.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FOURTH_COLUMN_2].setIcon(fourthColumn2);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
+            } else if (thirdCol2) {
+                blankCards[FOURTH_COLUMN_3].setVisible(false);
+                thirdCol2 = false;
+                fourthCol3 = true;
+
+                // Check for face card in newly placed card
+                if (logic.checkPathFaceCard(fourthColumn3.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FOURTH_COLUMN_3].setIcon(fourthColumn3);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
+            } else {
+                blankCards[FOURTH_COLUMN_4].setVisible(false);
+                thirdCol3 = false;
+                fourthCol4 = true;
+                chosenPathLow4.setEnabled(false);
+
+                // Check for face card in newly placed card
+                if (logic.checkPathFaceCard(fourthColumn4.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    fourthColumn4 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FOURTH_COLUMN_4].setIcon(fourthColumn4);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
             }
 
             // If there aren't any face cards, then continue
             // Change Button Visibility
-            chosenPathHigh5.setVisible(true);
-            chosenPathLow5.setVisible(true);
-            chosenPathHigh4.setVisible(false);
-            chosenPathLow4.setVisible(false);
+            chosenPathHigh4.setVisible(true);
+            chosenPathLow4.setVisible(true);
+            chosenPathHigh3.setVisible(false);
+            chosenPathLow3.setVisible(false);
+
         }
     }
 
@@ -1348,6 +1572,10 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setEnabled(true);
                     }
 
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
                     return;
                 }
             } else if (fourthCol3) {
@@ -1388,6 +1616,10 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
@@ -1431,6 +1663,10 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setEnabled(true);
                     }
 
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
                     return;
                 }
             }
@@ -1445,17 +1681,18 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    private void clickingLowerColumn3(Object choice) {
-        if (choice == chosenPathLow3) {
+    private void clickingLowerColumn4(Object choice) {
+        if (choice == chosenPathLow4) {
 
             // Change card visibility
-            if (thirdCol1) {
-                blankCards[FOURTH_COLUMN_2].setVisible(false);
-                thirdCol1 = false;
-                fourthCol2 = true;
+            if (fourthCol1) {
+                blankCards[FIFTH_COLUMN_1].setVisible(false);
+                fourthCol1 = false;
+                fifthCol1 = true;
+                chosenPathHigh5.setEnabled(false);
 
                 // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(fourthColumn2.toString())) {
+                if (logic.checkPathFaceCard(fifthColumn1.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1467,8 +1704,9 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FOURTH_COLUMN_2].setIcon(fourthColumn2);
+                    fifthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FIFTH_COLUMN_1].setIcon(fifthColumn1);
+                    secondStage.revalidate();
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1487,15 +1725,21 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
                     return;
                 }
-            } else if (thirdCol2) {
-                blankCards[FOURTH_COLUMN_3].setVisible(false);
-                thirdCol2 = false;
-                fourthCol3 = true;
+
+            } else if (fourthCol2) {
+                blankCards[FIFTH_COLUMN_2].setVisible(false);
+                fourthCol2 = false;
+                fifthCol2 = true;
 
                 // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(fourthColumn3.toString())) {
+                if (logic.checkPathFaceCard(fifthColumn2.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1507,8 +1751,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FOURTH_COLUMN_3].setIcon(fourthColumn3);
+                    fifthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FIFTH_COLUMN_2].setIcon(fifthColumn2);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1527,17 +1771,88 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
+            } else if (fourthCol3) {
+                blankCards[FIFTH_COLUMN_3].setVisible(false);
+                fourthCol3 = false;
+                fifthCol3 = true;
+                chosenPathLow5.setEnabled(false);
+
+                // Check for face card in newly placed card
+                if (logic.checkPathFaceCard(fifthColumn3.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    fifthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[FIFTH_COLUMN_3].setIcon(fifthColumn3);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
             } else {
-                blankCards[FOURTH_COLUMN_4].setVisible(false);
-                thirdCol3 = false;
-                fourthCol4 = true;
-                chosenPathLow4.setEnabled(false);
+                JOptionPane.showMessageDialog(null,
+                        "You can't go down");
+            }
 
-                // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(fourthColumn4.toString())) {
+            // If there aren't any face cards, then continue
+            // Change Button Visibility
+            chosenPathHigh5.setVisible(true);
+            chosenPathLow5.setVisible(true);
+            chosenPathHigh4.setVisible(false);
+            chosenPathLow4.setVisible(false);
+        }
+    }
+
+    private void clickingHigherColumn5(Object choice) {
+        if (choice == chosenPathHigh5) {
+
+            // Change card visibility
+            if (fifthCol1) {
+                JOptionPane.showMessageDialog(null,
+                        "You can't go up");
+            } else if (fifthCol2) {
+                blankCards[SIXTH_COLUMN_1].setVisible(false);
+                fifthCol2 = false;
+                sixthCol1 = true;
+                chosenPathHigh6.setEnabled(false);
+
+                // Checks for face card from the preplaced card
+                if (logic.checkPathFaceCard(sixthColumn1.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1549,8 +1864,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fourthColumn4 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FOURTH_COLUMN_4].setIcon(fourthColumn4);
+                    sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[SIXTH_COLUMN_1].setIcon(sixthColumn1);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1569,6 +1884,56 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
+                    return;
+                }
+            } else {
+                blankCards[SIXTH_COLUMN_2].setVisible(false);
+                fifthCol3 = false;
+                sixthCol2 = true;
+                chosenPathLow6.setEnabled(false);
+
+                // Check for face card in newly placed card
+                if (logic.checkPathFaceCard(sixthColumn2.toString())) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Yikes, face card! Restart!");
+
+                    // Cover the face card up
+                    for (JLabel blankCard : blankCards) {
+                        blankCard.setVisible(true);
+                    }
+                    flip.setEnabled(true);
+
+                    // Change the value of the face card
+                    sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[SIXTH_COLUMN_2].setIcon(sixthColumn2);
+
+                    // Go to the next card in the deck
+                    if (placeInDeck <= 52) {
+                        placeInDeck++;
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "You ran out of cards!");
+                    }
+
+                    // Make buttons disappear
+                    for (JButton upButtons : upPath) {
+                        upButtons.setVisible(false);
+                        upButtons.setEnabled(true);
+                    }
+                    for (JButton downButtons : downPath) {
+                        downButtons.setVisible(false);
+                        downButtons.setEnabled(true);
+                    }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
@@ -1576,26 +1941,25 @@ public class GamePanel extends JPanel implements ActionListener {
 
             // If there aren't any face cards, then continue
             // Change Button Visibility
-            chosenPathHigh4.setVisible(true);
-            chosenPathLow4.setVisible(true);
-            chosenPathHigh3.setVisible(false);
-            chosenPathLow3.setVisible(false);
-
+            chosenPathHigh6.setVisible(true);
+            chosenPathLow6.setVisible(true);
+            chosenPathHigh5.setVisible(false);
+            chosenPathLow5.setVisible(false);
         }
     }
 
-    private void clickingHigherColumn3(Object choice) {
-        if (choice == chosenPathHigh3) {
+    private void clickingLowerColumn5(Object choice) {
+        if (choice == chosenPathLow5) {
 
             // Change card visibility
-            if (thirdCol1) {
-                blankCards[FOURTH_COLUMN_1].setVisible(false);
-                thirdCol1 = false;
-                fourthCol1 = true;
-                chosenPathHigh4.setEnabled(false);
+            if (fifthCol1) {
+                blankCards[SIXTH_COLUMN_1].setVisible(false);
+                fifthCol1 = false;
+                sixthCol1 = true;
+                chosenPathHigh6.setEnabled(false);
 
                 // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(fourthColumn1.toString())) {
+                if (logic.checkPathFaceCard(sixthColumn1.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1607,8 +1971,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fourthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FOURTH_COLUMN_1].setIcon(fourthColumn1);
+                    sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[SIXTH_COLUMN_1].setIcon(sixthColumn1);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1628,16 +1992,21 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setEnabled(true);
                     }
 
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
+
                     return;
                 }
 
-            } else if (thirdCol2) {
-                blankCards[FOURTH_COLUMN_2].setVisible(false);
-                thirdCol2 = false;
-                fourthCol2 = true;
+            } else if (fifthCol2) {
+                blankCards[SIXTH_COLUMN_2].setVisible(false);
+                fifthCol2 = false;
+                sixthCol2 = true;
+                chosenPathLow6.setEnabled(false);
 
                 // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(fourthColumn2.toString())) {
+                if (logic.checkPathFaceCard(sixthColumn2.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1649,8 +2018,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FOURTH_COLUMN_2].setIcon(fourthColumn2);
+                    sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[SIXTH_COLUMN_2].setIcon(sixthColumn2);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1660,7 +2029,7 @@ public class GamePanel extends JPanel implements ActionListener {
                                 "You ran out of cards!");
                     }
 
-                    // Make buttons disappear and make them all enabled
+                    // Make buttons disappear
                     for (JButton upButtons : upPath) {
                         upButtons.setVisible(false);
                         upButtons.setEnabled(true);
@@ -1669,113 +2038,41 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
             } else {
-                blankCards[FOURTH_COLUMN_3].setVisible(false);
-                thirdCol3 = false;
-                fourthCol3 = true;
-
-                // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(fourthColumn3.toString())) {
-
-                    JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[FOURTH_COLUMN_3].setIcon(fourthColumn3);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
-
-                    return;
-                }
+                JOptionPane.showMessageDialog(null,
+                        "You can't go down");
             }
+
             // If there aren't any face cards, then continue
             // Change Button Visibility
-            chosenPathHigh4.setVisible(true);
-            chosenPathLow4.setVisible(true);
-            chosenPathHigh3.setVisible(false);
-            chosenPathLow3.setVisible(false);
-
+            chosenPathHigh6.setVisible(true);
+            chosenPathLow6.setVisible(true);
+            chosenPathHigh5.setVisible(false);
+            chosenPathLow5.setVisible(false);
         }
     }
 
-    private void clickingLowerColumn2(Object choice) {
-        if (choice == chosenPathLow2) {
+    private void clickingHigherColumn6(Object choice) {
+        if (choice == chosenPathHigh6) {
 
             // Change card visibility
-            if (secondCol1) {
-                blankCards[THIRD_COLUMN_2].setVisible(false);
-                secondCol1 = false;
-                thirdCol2 = true;
-
-                // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(thirdColumn2.toString())) {
-
-                    JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[THIRD_COLUMN_2].setIcon(thirdColumn2);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
-
-                    return;
-                }
+            if (sixthCol1) {
+                JOptionPane.showMessageDialog(null,
+                        "You can't go up");
             } else {
-                blankCards[THIRD_COLUMN_3].setVisible(false);
-                secondCol2 = false;
-                thirdCol3 = true;
+                blankCards[SEVENTH_COLUMN].setVisible(false);
+                sixthCol2 = false;
+                seventhCol = true;
 
-                // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(thirdColumn3.toString())) {
+                // Checks for face card from preplaced card
+                if (logic.checkPathFaceCard(seventhColumn.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1787,8 +2084,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    thirdColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[THIRD_COLUMN_3].setIcon(thirdColumn3);
+                    seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[SEVENTH_COLUMN].setIcon(seventhColumn);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1807,6 +2104,10 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
@@ -1814,24 +2115,23 @@ public class GamePanel extends JPanel implements ActionListener {
 
             // If there aren't any face cards, then continue
             // Change Button Visibility
-            chosenPathHigh3.setVisible(true);
-            chosenPathLow3.setVisible(true);
-            chosenPathHigh2.setVisible(false);
-            chosenPathLow2.setVisible(false);
+            chosenPathHigh6.setVisible(false);
+            chosenPathLow6.setVisible(false);
+
         }
     }
 
-    private void clickingHigherColumn2(Object choice) {
-        if (choice == chosenPathHigh2) {
+    private void clickingLowerColumn6(Object choice) {
+        if (choice == chosenPathLow6) {
 
             // Change card visibility
-            if (secondCol1) {
-                blankCards[THIRD_COLUMN_1].setVisible(false);
-                secondCol1 = false;
-                thirdCol1 = true;
+            if (sixthCol1) {
+                blankCards[SEVENTH_COLUMN].setVisible(false);
+                sixthCol1 = false;
+                seventhCol = true;
 
-                // Checks for face card from the preplaced card
-                if (logic.checkPathFaceCard(thirdColumn1.toString())) {
+                // Checks for face card from preplaced card
+                if (logic.checkPathFaceCard(seventhColumn.toString())) {
 
                     JOptionPane.showMessageDialog(this,
                             "Yikes, face card! Restart!");
@@ -1843,8 +2143,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     flip.setEnabled(true);
 
                     // Change the value of the face card
-                    thirdColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[THIRD_COLUMN_1].setIcon(thirdColumn1);
+                    seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                    cards[SEVENTH_COLUMN].setIcon(seventhColumn);
 
                     // Go to the next card in the deck
                     if (placeInDeck <= 52) {
@@ -1863,202 +2163,22 @@ public class GamePanel extends JPanel implements ActionListener {
                         downButtons.setVisible(false);
                         downButtons.setEnabled(true);
                     }
+
+                    // Reset pathways
+                    for (Boolean paths : pathWays)
+                        paths = false;
 
                     return;
                 }
             } else {
-                blankCards[THIRD_COLUMN_2].setVisible(false);
-                secondCol2 = false;
-                thirdCol2 = true;
-
-                // Check for face card in newly placed card
-                if (logic.checkPathFaceCard(thirdColumn2.toString())) {
-
-                    JOptionPane.showMessageDialog(this,
-                            "Yikes, face card! Restart!");
-
-                    // Cover the face card up
-                    for (JLabel blankCard : blankCards) {
-                        blankCard.setVisible(true);
-                    }
-                    flip.setEnabled(true);
-
-                    // Change the value of the face card
-                    thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                    cards[THIRD_COLUMN_2].setIcon(thirdColumn2);
-
-                    // Go to the next card in the deck
-                    if (placeInDeck <= 52) {
-                        placeInDeck++;
-                    } else {
-                        JOptionPane.showMessageDialog(this,
-                                "You ran out of cards!");
-                    }
-
-                    // Make buttons disappear
-                    for (JButton upButtons : upPath) {
-                        upButtons.setVisible(false);
-                        upButtons.setEnabled(true);
-                    }
-                    for (JButton downButtons : downPath) {
-                        downButtons.setVisible(false);
-                        downButtons.setEnabled(true);
-                    }
-
-                    return;
-                }
+                JOptionPane.showMessageDialog(null,
+                        "You can't go down");
             }
-            // If there aren't any face cards, then continue
 
+            // If there aren't any face cards, then continue
             // Change Button Visibility
-            chosenPathHigh3.setVisible(true);
-            chosenPathLow3.setVisible(true);
-            chosenPathHigh2.setVisible(false);
-            chosenPathLow2.setVisible(false);
-        }
-    }
-
-    private void clickingLowerColumn1(Object choice) {
-        if (choice == chosenPathLow1) {
-
-            // Change card visibility
-            blankCards[SECOND_COLUMN_2].setVisible(false);
-
-            // Checks for face card
-            if (logic.checkPathFaceCard(secondColumn2.toString())) {
-
-                JOptionPane.showMessageDialog(this,
-                        "Yikes, face card! Restart!");
-
-                // Cover the face card up
-                for (JLabel blankCard : blankCards) {
-                    blankCard.setVisible(true);
-                }
-                flip.setEnabled(true);
-
-                // Change the value of the face card
-                secondColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                cards[SECOND_COLUMN_2].setIcon(secondColumn2);
-
-                // Go to the next card in the deck
-                if (placeInDeck <= 52) {
-                    placeInDeck++;
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "You ran out of cards!");
-                }
-
-                // Make buttons disappear
-                for (JButton upButtons : upPath) {
-                    upButtons.setVisible(false);
-                    upButtons.setEnabled(true);
-                }
-                for (JButton downButtons : downPath) {
-                    downButtons.setVisible(false);
-                    downButtons.setEnabled(true);
-                }
-
-            } else {
-
-                // Change Button Visibility
-                chosenPathHigh2.setVisible(true);
-                chosenPathLow2.setVisible(true);
-                chosenPathHigh1.setVisible(false);
-                chosenPathLow1.setVisible(false);
-                secondCol2 = true;
-            }
-        }
-    }
-
-    private void clickingHigherColumn1(Object choice) {
-        if (choice == chosenPathHigh1) {
-
-            // Change Card Visibility
-            blankCards[SECOND_COLUMN_1].setVisible(false);
-
-            // Checks for face card
-            if (logic.checkPathFaceCard(secondColumn1.toString())) {
-
-                JOptionPane.showMessageDialog(this,
-                        "Yikes, face card! Restart!");
-
-                // Cover the face card up
-                for (JLabel blankCard : blankCards) {
-                    blankCard.setVisible(true);
-                }
-                flip.setEnabled(true);
-
-                // Change the value of the face card
-                secondColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                cards[SECOND_COLUMN_1].setIcon(secondColumn1);
-
-                // Go to the next card in the deck
-                if (placeInDeck <= 52) {
-                    placeInDeck++;
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "You ran out of cards!");
-                }
-
-                // Make buttons disappear
-                for (JButton upButtons : upPath) {
-                    upButtons.setVisible(false);
-                    upButtons.setEnabled(true);
-                }
-                for (JButton downButtons : downPath) {
-                    downButtons.setVisible(false);
-                    downButtons.setEnabled(true);
-                }
-
-            } else {
-
-                // Change Button Visibility
-                chosenPathHigh2.setVisible(true);
-                chosenPathLow2.setVisible(true);
-                chosenPathHigh1.setVisible(false);
-                chosenPathLow1.setVisible(false);
-                secondCol1 = true;
-            }
-        }
-    }
-
-    private void clickingFlip(Object choice) {
-        if (choice == flip) {
-
-            // Change Card Visibility
-            blankCards[FIRST_COLUMN].setVisible(false);
-
-            // Checks for face card
-            if (logic.checkPathFaceCard(firstColumn.toString())) {
-
-                JOptionPane.showMessageDialog(this,
-                        "Yikes, face card! Restart!");
-
-                // Cover the face card up
-                blankCards[FIRST_COLUMN].setVisible(true);
-                flip.setEnabled(true);
-
-                // Change the value of the face card
-                firstColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
-                cards[FIRST_COLUMN].setIcon(firstColumn);
-
-                // Go to the next card in the deck
-                if (placeInDeck <= 52) {
-                    placeInDeck++;
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "You ran out of cards!");
-                }
-            }
-
-            // If there aren't any face cards, then continue
-            else {
-
-                // Change Button Visibility
-                flip.setEnabled(false);
-                chosenPathHigh1.setVisible(true);
-                chosenPathLow1.setVisible(true);
-            }
+            chosenPathHigh6.setVisible(false);
+            chosenPathLow6.setVisible(false);
         }
     }
 

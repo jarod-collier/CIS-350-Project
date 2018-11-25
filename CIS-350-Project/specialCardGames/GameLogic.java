@@ -178,7 +178,6 @@ public class GameLogic {
         } else {
             score--;
         }
-        //deck.chooseCard(); <<<< TODO: this breaks the code
     }
 
     /******************************************************************
@@ -201,8 +200,6 @@ public class GameLogic {
             //the user's choice is incorrect
             decision = false;
         }
-
-        //deck.chooseCard(); <<<< TODO: this breaks the code
         return decision;
     }
 
@@ -223,7 +220,6 @@ public class GameLogic {
             decision = false;
         }
 
-        //deck.chooseCard(); <<<< TODO: this breaks the code
         return decision;
     }
 
@@ -239,8 +235,6 @@ public class GameLogic {
         } else {
             score += 4;
         }
-
-        //deck.chooseCard(); <<<< TODO: this breaks the code
     }
 
     /******************************************************************
@@ -255,8 +249,6 @@ public class GameLogic {
         } else {
             score += 10;
         }
-
-        //deck.chooseCard(); <<<< TODO: this breaks the code
     }
 
     /******************************************************************
