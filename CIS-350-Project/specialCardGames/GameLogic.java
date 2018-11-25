@@ -275,6 +275,8 @@ public class GameLogic {
         // Gets the cards value from the path
         char cardValue = (ending.charAt(0));
 
+        System.out.println(cardValue);
+
         // Checks if the card value is a face card, if it is change the score
         if (cardValue == 'J') {
             score += 1;
