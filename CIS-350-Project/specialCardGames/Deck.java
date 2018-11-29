@@ -17,7 +17,6 @@ import java.util.*;
  *
  *  Order of suits is Black-Red-Black-Red. Hence the order is:
  *  Spades, Hearts, Clubs, and Diamonds
- * hi friends
  *********************************************************************/
 
 public class Deck {

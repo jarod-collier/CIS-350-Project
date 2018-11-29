@@ -165,18 +165,16 @@ public class GameLogic {
     /******************************************************************
      * The first "level" of the game, checks if the randomly chosen
      * card has the same color as the players choice
-     * @param color - The player input of red or black in integer form
-     *                 in order to match the Deck class
+     * @param guess - The player's guess is either true or false
      *****************************************************************/
-    public void redVsBlackScore(int color) {
-        //TODO Change this
+    public void redVsBlackScore(boolean guess) {
 
         // Checks if correct
-        if (deck.blackOrRed() == color) {
-            score++;
+        if (guess) {
+            score--;
             //return ;
         } else {
-            score--;
+            score++;
         }
     }
 
@@ -226,11 +224,10 @@ public class GameLogic {
     /******************************************************************
      * The fourth "level" of the game, checks if the randomly chosen
      * card has the same suit as the players choice
-     * @param suit - The player input of the suit in integer form in
-     *                order to match the Deck class
+     * @param guess - The player's guess is either true or false
      *****************************************************************/
-    public void guessSuitScore(int suit) {
-        if (deck.guessSuit(suit)) {
+    public void guessSuitScore(boolean guess) {
+        if (guess) {
             score -= 4;
         } else {
             score += 4;
