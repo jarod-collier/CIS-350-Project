@@ -485,8 +485,10 @@ public class Deck {
             return "queen";
         } else if (cardValue.equals("K")) {
             return "king";
-        } else {
+        } else if (cardValue.equals("A")) {
             return "ace";
+        } else {
+            return "oops";
         }
 
     }

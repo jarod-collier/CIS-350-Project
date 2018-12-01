@@ -2122,7 +2122,7 @@ public class GamePanel extends JPanel implements ActionListener {
         // Change Button Visibility
         chosenPathHigh6.setVisible(false);
         chosenPathLow6.setVisible(false);
-        
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
