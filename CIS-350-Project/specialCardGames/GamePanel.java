@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener {
     // Button array that holds all of the Second Stage Buttons
     private JButton[] upPath, downPath;
 
-    private GameLogic logic;
+    private GameLogic stage1, stage2;
 
     private JPanel firstStage, secondStage, pointsPanel, questionPanel, leaderBoardPanel;
 
@@ -87,13 +87,11 @@ public class GamePanel extends JPanel implements ActionListener {
      *****************************************************************/
     public GamePanel() {
 
-        logic = new GameLogic();
+        stage1 = new GameLogic();
+        stage2 = new GameLogic();
 
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-
-        System.out.println(screenWidth);
-        System.out.println(screenHeight);
 
         //set preferred size to the size of the screen
         setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -102,7 +100,7 @@ public class GamePanel extends JPanel implements ActionListener {
         stageOneButtonsAndLabels();
 
         //initialize the points label
-        pointsLabel = new JLabel("Players points: " + logic.getScore());
+        pointsLabel = new JLabel("Players points: " + stage1.getScore());
         pointsLabel.setFont(new Font("Cooper Black", Font.BOLD, 30));
 
         //initialize the question label
@@ -332,8 +330,9 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     private void secondStageCreations() {
-        // Creates a new deck for the second stage of the game
-        logic.createNewDeck();
+
+//        // Creates a new deck for the second stage of the game
+//        stage1.createNewDeck();
 
         // Creating the blank cards
         blankCards = new JLabel[16];
@@ -344,22 +343,22 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Creating the cards
         try {
-            firstColumn = new ImageIcon(getClass().getResource(logic.smallCardString(FIRST_COLUMN + 1)));
-            secondColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(SECOND_COLUMN_1 + 1)));
-            secondColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(SECOND_COLUMN_2 + 1)));
-            thirdColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(THIRD_COLUMN_1 + 1)));
-            thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(THIRD_COLUMN_2 + 1)));
-            thirdColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(THIRD_COLUMN_3 + 1)));
-            fourthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(FOURTH_COLUMN_1 + 1)));
-            fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(FOURTH_COLUMN_2 + 1)));
-            fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(FOURTH_COLUMN_3 + 1)));
-            fourthColumn4 = new ImageIcon(getClass().getResource(logic.smallCardString(FOURTH_COLUMN_4 + 1)));
-            fifthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(FIFTH_COLUMN_1 + 1)));
-            fifthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(FIFTH_COLUMN_2 + 1)));
-            fifthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(FIFTH_COLUMN_3 + 1)));
-            sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(SIXTH_COLUMN_1 + 1)));
-            sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(SIXTH_COLUMN_2 + 1)));
-            seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(SEVENTH_COLUMN + 1)));
+            firstColumn = new ImageIcon(getClass().getResource(stage2.smallCardString(FIRST_COLUMN + 1)));
+            secondColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(SECOND_COLUMN_1 + 1)));
+            secondColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(SECOND_COLUMN_2 + 1)));
+            thirdColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(THIRD_COLUMN_1 + 1)));
+            thirdColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(THIRD_COLUMN_2 + 1)));
+            thirdColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(THIRD_COLUMN_3 + 1)));
+            fourthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(FOURTH_COLUMN_1 + 1)));
+            fourthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(FOURTH_COLUMN_2 + 1)));
+            fourthColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(FOURTH_COLUMN_3 + 1)));
+            fourthColumn4 = new ImageIcon(getClass().getResource(stage2.smallCardString(FOURTH_COLUMN_4 + 1)));
+            fifthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(FIFTH_COLUMN_1 + 1)));
+            fifthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(FIFTH_COLUMN_2 + 1)));
+            fifthColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(FIFTH_COLUMN_3 + 1)));
+            sixthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(SIXTH_COLUMN_1 + 1)));
+            sixthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(SIXTH_COLUMN_2 + 1)));
+            seventhColumn = new ImageIcon(getClass().getResource(stage2.smallCardString(SEVENTH_COLUMN + 1)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -473,11 +472,11 @@ public class GamePanel extends JPanel implements ActionListener {
         try {
             //get Card images for display
             dealerCard = new ImageIcon(getClass().getResource("cardImages/big/BackBig.png"));
-            redBlackCard = new ImageIcon(getClass().getResource(logic.bigCardString(1)));
-            highLowCard = new ImageIcon(getClass().getResource(logic.bigCardString(2)));
-            inOutCard = new ImageIcon(getClass().getResource(logic.bigCardString(3)));
-            suitCard = new ImageIcon(getClass().getResource(logic.bigCardString(4)));
-            randomCard = new ImageIcon(getClass().getResource(logic.bigCardString(5)));
+            redBlackCard = new ImageIcon(getClass().getResource(stage1.bigCardString(1)));
+            highLowCard = new ImageIcon(getClass().getResource(stage1.bigCardString(2)));
+            inOutCard = new ImageIcon(getClass().getResource(stage1.bigCardString(3)));
+            suitCard = new ImageIcon(getClass().getResource(stage1.bigCardString(4)));
+            randomCard = new ImageIcon(getClass().getResource(stage1.bigCardString(5)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -775,103 +774,107 @@ public class GamePanel extends JPanel implements ActionListener {
         Object choice = e.getSource();
 
         if (choice == redButton || choice == blackButton) {
+
             // Checks if user clicks on red or black
             clickingColor(choice);
-        }
 
-        else if (choice == higherButton || choice == lowerButton ||
+        } else if (choice == higherButton || choice == lowerButton ||
                 choice == hiLowEqualButton) {
+
             // Checks if user clicked higher or lower
             clickingHighOrLow(choice);
-        }
 
-        else if (choice == insideButton || choice == outsideButton ||
+        } else if (choice == insideButton || choice == outsideButton ||
                 choice == inOutEqualButton) {
+
             // Checks if user clicked in or out
             clickingInOrOut(choice);
-        }
 
-        else if (choice == spadesButton || choice == heartsButton ||
+        } else if (choice == spadesButton || choice == heartsButton ||
                 choice == clubsButton || choice == diamondsButton) {
+
             // Checks what suit the user picked
             clickingSuit(choice);
-        }
 
-        else if (choice == twoButton || choice == threeButton || choice == fourButton ||
+        } else if (choice == twoButton || choice == threeButton || choice == fourButton ||
                 choice == fiveButton || choice == sixButton || choice == sevenButton ||
                 choice == eightButton || choice == nineButton || choice == tenButton ||
                 choice == jackButton || choice == queenButton || choice == kingButton ||
                 choice == aceButton) {
+
             // Checks what number the user picked
             clickingNumber(choice);
-        }
 
-        else if (choice == flip) {
+        } else if (choice == flip) {
+
             // Clicking the flip button
             clickingFlip();
-        }
 
-        else if (choice == chosenPathHigh1) {
+        } else if (choice == chosenPathHigh1) {
+
             // Clicking higher in the first column
             clickingHigherColumn1();
-        }
 
-        else if (choice == chosenPathLow1) {
+        } else if (choice == chosenPathLow1) {
+
             // Clicking lower in the first column
             clickingLowerColumn1();
-        }
 
-        else if (choice == chosenPathHigh2) {
+        } else if (choice == chosenPathHigh2) {
+
             // Clicking higher in the second column
             clickingHigherColumn2();
-        }
 
-        else if (choice == chosenPathLow2) {
+        } else if (choice == chosenPathLow2) {
+
             // Clicking lower in the second column
             clickingLowerColumn2();
-        }
 
-        else if (choice == chosenPathHigh3) {
+        } else if (choice == chosenPathHigh3) {
+
             // Clicking higher in the third column
             clickingHigherColumn3();
-        }
 
-        else if (choice == chosenPathLow3) {
+        } else if (choice == chosenPathLow3) {
+
             // Clicking lower in the third column
             clickingLowerColumn3();
-        }
 
-        else if (choice == chosenPathHigh4) {
+        } else if (choice == chosenPathHigh4) {
+
             // Clicking higher in the fourth column
             clickingHigherColumn4();
-        }
 
-        else if (choice == chosenPathLow4) {
+        } else if (choice == chosenPathLow4) {
+
             // Clicking lower in the fourth column
             clickingLowerColumn4();
-        }
 
-        else if (choice == chosenPathHigh5) {
+        } else if (choice == chosenPathHigh5) {
+
             // Clicking higher in the fifth column
             clickingHigherColumn5();
-        }
 
-        else if (choice == chosenPathLow5) {
+        } else if (choice == chosenPathLow5) {
+
             // Clicking lower in the fifth column
             clickingLowerColumn5();
-        }
 
-        else if (choice == chosenPathHigh6) {
+        } else if (choice == chosenPathHigh6) {
+
             // Clicking higher in the sixth column
             clickingHigherColumn6();
-        }
 
-        else if (choice == chosenPathLow6) {
+        } else if (choice == chosenPathLow6) {
             // Clicking lower in the sixth column
             clickingLowerColumn6();
         }
 
-        pointsLabel.setText("Players points: " + logic.getScore());
+        if (secondStage.isVisible()) {
+            pointsLabel.setText("Players points: " + stage2.getScore());
+        } else {
+            pointsLabel.setText("Players points: " + stage1.getScore());
+        }
     }
 
     private void clickingFlip() {
@@ -897,7 +900,7 @@ public class GamePanel extends JPanel implements ActionListener {
         blankCards[FIRST_COLUMN].setVisible(false);
 
         // Checks for face card
-        if (logic.checkPathFaceCard(firstColumn.toString())) {
+        if (stage2.checkPathFaceCard(firstColumn.toString())) {
 
             JOptionPane.showMessageDialog(this,
                     "Yikes, face card! Restart!");
@@ -907,7 +910,7 @@ public class GamePanel extends JPanel implements ActionListener {
             flip.setEnabled(true);
 
             // Change the value of the face card
-            firstColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+            firstColumn = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
             cards[FIRST_COLUMN].setIcon(firstColumn);
 
             // Go to the next card in the deck
@@ -937,7 +940,7 @@ public class GamePanel extends JPanel implements ActionListener {
         blankCards[SECOND_COLUMN_1].setVisible(false);
 
         // Checks for face card
-        if (logic.checkPathFaceCard(secondColumn1.toString())) {
+        if (stage2.checkPathFaceCard(secondColumn1.toString())) {
 
             JOptionPane.showMessageDialog(this,
                     "Yikes, face card! Restart!");
@@ -949,7 +952,7 @@ public class GamePanel extends JPanel implements ActionListener {
             flip.setEnabled(true);
 
             // Change the value of the face card
-            secondColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+            secondColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
             cards[SECOND_COLUMN_1].setIcon(secondColumn1);
 
             // Go to the next card in the deck
@@ -958,7 +961,7 @@ public class GamePanel extends JPanel implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this,
                         "You ran out of cards! \n\nYour score is" +
-                                "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                 System.exit(0);
             }
@@ -991,7 +994,7 @@ public class GamePanel extends JPanel implements ActionListener {
         blankCards[SECOND_COLUMN_2].setVisible(false);
 
         // Checks for face card
-        if (logic.checkPathFaceCard(secondColumn2.toString())) {
+        if (stage2.checkPathFaceCard(secondColumn2.toString())) {
 
             JOptionPane.showMessageDialog(this,
                     "Yikes, face card! Restart!");
@@ -1003,7 +1006,7 @@ public class GamePanel extends JPanel implements ActionListener {
             flip.setEnabled(true);
 
             // Change the value of the face card
-            secondColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+            secondColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
             cards[SECOND_COLUMN_2].setIcon(secondColumn2);
 
             // Go to the next card in the deck
@@ -1012,7 +1015,7 @@ public class GamePanel extends JPanel implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this,
                         "You ran out of cards! \n\nYour score is" +
-                                "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                 System.exit(0);
             }
@@ -1049,7 +1052,7 @@ public class GamePanel extends JPanel implements ActionListener {
             thirdCol1 = true;
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(thirdColumn1.toString())) {
+            if (stage2.checkPathFaceCard(thirdColumn1.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1061,7 +1064,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                thirdColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                thirdColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[THIRD_COLUMN_1].setIcon(thirdColumn1);
 
                 // Go to the next card in the deck
@@ -1070,7 +1073,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1092,7 +1095,7 @@ public class GamePanel extends JPanel implements ActionListener {
             thirdCol2 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(thirdColumn2.toString())) {
+            if (stage2.checkPathFaceCard(thirdColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1104,7 +1107,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                thirdColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[THIRD_COLUMN_2].setIcon(thirdColumn2);
 
                 // Go to the next card in the deck
@@ -1113,7 +1116,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1150,7 +1153,7 @@ public class GamePanel extends JPanel implements ActionListener {
             thirdCol2 = true;
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(thirdColumn2.toString())) {
+            if (stage2.checkPathFaceCard(thirdColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1162,7 +1165,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                thirdColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                thirdColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[THIRD_COLUMN_2].setIcon(thirdColumn2);
 
                 // Go to the next card in the deck
@@ -1171,7 +1174,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1193,7 +1196,7 @@ public class GamePanel extends JPanel implements ActionListener {
             thirdCol3 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(thirdColumn3.toString())) {
+            if (stage2.checkPathFaceCard(thirdColumn3.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1205,7 +1208,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                thirdColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                thirdColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[THIRD_COLUMN_3].setIcon(thirdColumn3);
 
                 // Go to the next card in the deck
@@ -1214,7 +1217,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1253,7 +1256,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathHigh4.setEnabled(false);
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(fourthColumn1.toString())) {
+            if (stage2.checkPathFaceCard(fourthColumn1.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1265,7 +1268,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fourthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fourthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FOURTH_COLUMN_1].setIcon(fourthColumn1);
 
                 // Go to the next card in the deck
@@ -1274,7 +1277,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1298,7 +1301,7 @@ public class GamePanel extends JPanel implements ActionListener {
             fourthCol2 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fourthColumn2.toString())) {
+            if (stage2.checkPathFaceCard(fourthColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1310,7 +1313,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fourthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FOURTH_COLUMN_2].setIcon(fourthColumn2);
 
                 // Go to the next card in the deck
@@ -1319,7 +1322,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1342,7 +1345,7 @@ public class GamePanel extends JPanel implements ActionListener {
             fourthCol3 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fourthColumn3.toString())) {
+            if (stage2.checkPathFaceCard(fourthColumn3.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1354,7 +1357,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fourthColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FOURTH_COLUMN_3].setIcon(fourthColumn3);
 
                 // Go to the next card in the deck
@@ -1363,7 +1366,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1401,7 +1404,7 @@ public class GamePanel extends JPanel implements ActionListener {
             fourthCol2 = true;
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(fourthColumn2.toString())) {
+            if (stage2.checkPathFaceCard(fourthColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1413,7 +1416,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fourthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fourthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FOURTH_COLUMN_2].setIcon(fourthColumn2);
 
                 // Go to the next card in the deck
@@ -1422,7 +1425,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1445,7 +1448,7 @@ public class GamePanel extends JPanel implements ActionListener {
             fourthCol3 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fourthColumn3.toString())) {
+            if (stage2.checkPathFaceCard(fourthColumn3.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1457,7 +1460,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fourthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fourthColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FOURTH_COLUMN_3].setIcon(fourthColumn3);
 
                 // Go to the next card in the deck
@@ -1466,7 +1469,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1490,7 +1493,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathLow4.setEnabled(false);
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fourthColumn4.toString())) {
+            if (stage2.checkPathFaceCard(fourthColumn4.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1502,7 +1505,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fourthColumn4 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fourthColumn4 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FOURTH_COLUMN_4].setIcon(fourthColumn4);
 
                 // Go to the next card in the deck
@@ -1511,7 +1514,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1554,7 +1557,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathHigh5.setEnabled(false);
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(fifthColumn1.toString())) {
+            if (stage2.checkPathFaceCard(fifthColumn1.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1566,7 +1569,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fifthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fifthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FIFTH_COLUMN_1].setIcon(fifthColumn1);
 
                 // Go to the next card in the deck
@@ -1575,7 +1578,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1598,7 +1601,7 @@ public class GamePanel extends JPanel implements ActionListener {
             fifthCol2 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fifthColumn2.toString())) {
+            if (stage2.checkPathFaceCard(fifthColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1610,7 +1613,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fifthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fifthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FIFTH_COLUMN_2].setIcon(fifthColumn2);
 
                 // Go to the next card in the deck
@@ -1619,7 +1622,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1643,7 +1646,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathLow5.setEnabled(false);
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fifthColumn3.toString())) {
+            if (stage2.checkPathFaceCard(fifthColumn3.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1655,7 +1658,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fifthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fifthColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FIFTH_COLUMN_3].setIcon(fifthColumn3);
 
                 // Go to the next card in the deck
@@ -1664,7 +1667,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1703,7 +1706,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathHigh5.setEnabled(false);
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(fifthColumn1.toString())) {
+            if (stage2.checkPathFaceCard(fifthColumn1.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1715,7 +1718,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fifthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fifthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FIFTH_COLUMN_1].setIcon(fifthColumn1);
                 secondStage.revalidate();
 
@@ -1725,7 +1728,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1749,7 +1752,7 @@ public class GamePanel extends JPanel implements ActionListener {
             fifthCol2 = true;
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fifthColumn2.toString())) {
+            if (stage2.checkPathFaceCard(fifthColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1761,7 +1764,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fifthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fifthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FIFTH_COLUMN_2].setIcon(fifthColumn2);
 
                 // Go to the next card in the deck
@@ -1770,7 +1773,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1794,7 +1797,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathLow5.setEnabled(false);
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(fifthColumn3.toString())) {
+            if (stage2.checkPathFaceCard(fifthColumn3.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1806,7 +1809,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                fifthColumn3 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                fifthColumn3 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[FIFTH_COLUMN_3].setIcon(fifthColumn3);
 
                 // Go to the next card in the deck
@@ -1815,7 +1818,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1860,7 +1863,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathHigh6.setEnabled(false);
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(sixthColumn1.toString())) {
+            if (stage2.checkPathFaceCard(sixthColumn1.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1872,7 +1875,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                sixthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[SIXTH_COLUMN_1].setIcon(sixthColumn1);
 
                 // Go to the next card in the deck
@@ -1881,7 +1884,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1905,7 +1908,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathLow6.setEnabled(false);
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(sixthColumn2.toString())) {
+            if (stage2.checkPathFaceCard(sixthColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1917,7 +1920,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                sixthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[SIXTH_COLUMN_2].setIcon(sixthColumn2);
 
                 // Go to the next card in the deck
@@ -1926,7 +1929,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -1965,7 +1968,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathHigh6.setEnabled(false);
 
             // Checks for face card from the preplaced card
-            if (logic.checkPathFaceCard(sixthColumn1.toString())) {
+            if (stage2.checkPathFaceCard(sixthColumn1.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -1977,7 +1980,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                sixthColumn1 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                sixthColumn1 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[SIXTH_COLUMN_1].setIcon(sixthColumn1);
 
                 // Go to the next card in the deck
@@ -1986,7 +1989,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -2011,7 +2014,7 @@ public class GamePanel extends JPanel implements ActionListener {
             chosenPathLow6.setEnabled(false);
 
             // Check for face card in newly placed card
-            if (logic.checkPathFaceCard(sixthColumn2.toString())) {
+            if (stage2.checkPathFaceCard(sixthColumn2.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -2023,7 +2026,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                sixthColumn2 = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                sixthColumn2 = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[SIXTH_COLUMN_2].setIcon(sixthColumn2);
 
                 // Go to the next card in the deck
@@ -2032,7 +2035,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -2075,7 +2078,7 @@ public class GamePanel extends JPanel implements ActionListener {
             seventhCol = true;
 
             // Checks for face card from preplaced card
-            if (logic.checkPathFaceCard(seventhColumn.toString())) {
+            if (stage2.checkPathFaceCard(seventhColumn.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -2087,7 +2090,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                seventhColumn = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[SEVENTH_COLUMN].setIcon(seventhColumn);
 
                 // Go to the next card in the deck
@@ -2095,8 +2098,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     placeInDeck++;
                 } else {
                     JOptionPane.showMessageDialog(this,
-                            "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                            "You ran out of cards! \n\nYour score is " +
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -2119,7 +2122,18 @@ public class GamePanel extends JPanel implements ActionListener {
         // Change Button Visibility
         chosenPathHigh6.setVisible(false);
         chosenPathLow6.setVisible(false);
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        JOptionPane.showMessageDialog(null, ("Thank you for playing Ride the Bus!!! \n\nYour score is "
+                        + stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups"),
+                "Done", JOptionPane.PLAIN_MESSAGE);
+
+        System.exit(0);
 
     }
 
@@ -2133,7 +2147,7 @@ public class GamePanel extends JPanel implements ActionListener {
             seventhCol = true;
 
             // Checks for face card from preplaced card
-            if (logic.checkPathFaceCard(seventhColumn.toString())) {
+            if (stage2.checkPathFaceCard(seventhColumn.toString())) {
 
                 JOptionPane.showMessageDialog(this,
                         "Yikes, face card! Restart!");
@@ -2145,7 +2159,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 flip.setEnabled(true);
 
                 // Change the value of the face card
-                seventhColumn = new ImageIcon(getClass().getResource(logic.smallCardString(placeInDeck)));
+                seventhColumn = new ImageIcon(getClass().getResource(stage2.smallCardString(placeInDeck)));
                 cards[SEVENTH_COLUMN].setIcon(seventhColumn);
 
                 // Go to the next card in the deck
@@ -2153,8 +2167,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     placeInDeck++;
                 } else {
                     JOptionPane.showMessageDialog(this,
-                            "You ran out of cards! \n\nYour score is" +
-                                    "logic.getScore() + \nYour punishment is to do " + logic.getScore() + " Push-ups");
+                            "You ran out of cards! \n\nYour score is " +
+                                    stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups");
 
                     System.exit(0);
                 }
@@ -2188,7 +2202,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
         JOptionPane.showMessageDialog(null, ("Thank you for playing Ride the Bus!!! \n\nYour score is "
-                + logic.getScore() + "\nYour punishment is to do " + logic.getScore() + " Push-ups"),
+                        + stage2.getScore() + "\nYour punishment is to do " + stage2.getScore() + " Push-ups"),
                 "Done", JOptionPane.PLAIN_MESSAGE);
 
         System.exit(0);
@@ -2197,22 +2211,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
     private void clickingColor(Object choice) {
 
-
-        char cardColor;
-
-        //check if the card is not a 10, which will increase the length
-        if (logic.smallCardString(1).length() == 23) {
-
-            //get color char from the path
-            cardColor = (logic.smallCardString(1)).charAt(18);
-
+        // Sets the choice the user makes
+        String cardColor;
+        if (choice == blackButton) {
+            cardColor = "black";
         } else {
-
-            cardColor = (logic.smallCardString(1)).charAt(19);
+            cardColor = "red";
         }
-
-        //TODO: this shows the error coming back from the smallCardString method
-        System.out.println(logic.smallCardString(1) + " " + cardColor);
 
         // Make color buttons invisible
         for (JButton color : colors) {
@@ -2221,17 +2226,15 @@ public class GamePanel extends JPanel implements ActionListener {
 
         redBlackLabel.setVisible(true);
 
-            if ((choice == redButton && (cardColor == 'D' || cardColor == 'H')) ||
-                    (choice == blackButton && (cardColor == 'S' || cardColor == 'C'))) {
-                JOptionPane.showMessageDialog(null,
-                        "You got it right!");
-                logic.redVsBlackScore(true);
+        // Checks if card is red or black
+        if (stage1.redVsBlackScore(redBlackCard.toString(), cardColor)) {
+            JOptionPane.showMessageDialog(null,
+                    "You got it right!");
 
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Ouch!");
-                logic.redVsBlackScore(false);
-            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ouch!");
+        }
 
         // Make highLow buttons visible
         for (JButton aHighLow : highLow) {
@@ -2248,14 +2251,18 @@ public class GamePanel extends JPanel implements ActionListener {
 
         highLowLabel.setVisible(true);
 
-        //variable to pass the choice to the logic
-        int userChoice;
+        //variable to pass the choice to the stage1
+        String userChoice;
 
         //read the user's choice and assign the correct value
         // to compare it
-        if (choice == higherButton) userChoice = 1;
-        else if (choice == lowerButton) userChoice = -1;
-        else userChoice = 0;
+        if (choice == higherButton) {
+            userChoice = "higher";
+        } else if (choice == lowerButton) {
+            userChoice = "lower";
+        } else {
+            userChoice = "equal";
+        }
 
 
         // Make highLow buttons invisible
@@ -2263,13 +2270,13 @@ public class GamePanel extends JPanel implements ActionListener {
             aHighLow.setVisible(false);
         }
 
-            if (logic.lowerOrHigherScore(userChoice)) {
-                JOptionPane.showMessageDialog(null,
-                        "Correct");
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Ouch");
-            }
+        if (stage1.lowerOrHigherScore(userChoice)) {
+            JOptionPane.showMessageDialog(null,
+                    "Correct");
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ouch");
+        }
 
 
         // Makes inOut buttons visible
@@ -2279,8 +2286,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
         //change the question
         questionLabel.setText("Inside or outside the previous two cards?");
-
-
     }
 
     private void clickingInOrOut(Object choice) {
@@ -2288,29 +2293,28 @@ public class GamePanel extends JPanel implements ActionListener {
 
         inOutLabel.setVisible(true);
 
-        int userChoice;
+        String userChoice;
 
         if (choice == insideButton)
-            userChoice = 1;
+            userChoice = "inside";
         else if (choice == outsideButton)
-            userChoice = -1;
+            userChoice = "outside";
         else
-            userChoice = 0;
+            userChoice = "equal";
 
         // Makes inOut buttons invisible
         for (JButton anInOut : inOut) {
             anInOut.setVisible(false);
         }
 
-            if (logic.insideOrOutsideScore(userChoice)) {
+        if (stage1.insideOrOutsideScore(userChoice)) {
 
-                JOptionPane.showMessageDialog(null,
-                        "Correct");
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Ouch");
-            }
-
+            JOptionPane.showMessageDialog(null,
+                    "Correct");
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ouch");
+        }
 
         // Make suit buttons visible
         for (JButton suit : suits) {
@@ -2332,33 +2336,27 @@ public class GamePanel extends JPanel implements ActionListener {
             suit.setVisible(false);
         }
 
-
-        char userChoice;
-
-        //check if the card is not a 10, which will increase the length
-        if (logic.bigCardString(4).length() == 21) {
-
-            //get color char from the path
-            userChoice = (logic.bigCardString(4)).charAt(16);
-
+        // Sets the choice the user makes
+        String cardSuit;
+        if (choice == spadesButton) {
+            cardSuit = "spades";
+        } else if (choice == heartsButton) {
+            cardSuit = "hearts";
+        } else if (choice == clubsButton) {
+            cardSuit = "clubs";
         } else {
-
-            userChoice = (logic.bigCardString(4)).charAt(17);
+            cardSuit = "diamonds";
         }
 
-            if ((choice == diamondsButton && userChoice == 'D') ||
-                    (choice == heartsButton && userChoice == 'H') ||
-                    (choice == clubsButton && userChoice == 'C') ||
-                    (choice == spadesButton && userChoice == 'S')) {
+        // Checks if card is correct suit
+        if (stage1.guessSuitScore(suitCard.toString(), cardSuit)) {
+            JOptionPane.showMessageDialog(null,
+                    "You got it right!");
 
-                JOptionPane.showMessageDialog(null,
-                        "You got it right!");
-                logic.guessSuitScore(true);
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Ouch!");
-                logic.guessSuitScore(false);
-            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ouch!");
+        }
 
         // Make the number buttons visible
         for (JButton number : numbers) {
@@ -2392,72 +2390,41 @@ public class GamePanel extends JPanel implements ActionListener {
         else if (choice == eightButton) userChoice = "8";
         else if (choice == nineButton) userChoice = "9";
         else if (choice == tenButton) userChoice = "10";
-        else if (choice == jackButton) userChoice = "J";
-        else if (choice == queenButton) userChoice = "Q";
-        else if (choice == kingButton) userChoice = "K";
-        else if (choice == aceButton) userChoice = "A";
+        else if (choice == jackButton) userChoice = "jack";
+        else if (choice == queenButton) userChoice = "queen";
+        else if (choice == kingButton) userChoice = "king";
+        else if (choice == aceButton) userChoice = "ace";
         else userChoice = "Something happened";
 
-        //get card value from path of the card
-
-        String cardValue;
-
-        //check if the card is not a 10, which will increase the length
-        if (logic.smallCardString(5).length() == 23) {
-
-            //get color char from the path
-            cardValue = logic.smallCardString(5).substring(17, 18);
-
+        if (stage1.guessCardValueScore(randomCard.toString(), userChoice)) {
+            JOptionPane.showMessageDialog(null,
+                    "Awesome!!!");
         } else {
-
-            cardValue = (logic.smallCardString(5)).substring(17, 17);
+            JOptionPane.showMessageDialog(null,
+                    "Damn it!");
         }
-
-        int valueSendLogic;
-
-        switch (userChoice) {
-            case "J":
-                valueSendLogic = 11;
-                break;
-            case "Q":
-                valueSendLogic = 12;
-                break;
-            case "K":
-                valueSendLogic = 13;
-                break;
-            case "A":
-                valueSendLogic = 14;
-                break;
-            default:
-                valueSendLogic = Integer.parseInt(userChoice);
-                break;
-        }
-
-        logic.guessCardValueScore(valueSendLogic);
-
-            if (cardValue.equals(userChoice)) {
-                JOptionPane.showMessageDialog(null,
-                        "Awesome!!!");
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Damn it!");
-            }
 
         //change the question
         questionLabel.setText("The first stage is done. Wait a second");
 
-        //sleep for 5 seconds
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e1) {
-                System.out.println("The time got interrupted");
-            }
+        // Update the points
+        pointsLabel.setText("Players points: " + stage1.getScore());
 
-            JOptionPane.showMessageDialog(null, "Time for stage 2!");
+        //sleep for 5 seconds
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e1) {
+            System.out.println("The time got interrupted");
+        }
+
+        JOptionPane.showMessageDialog(null, "Time for stage 2!");
 
         // Sets first stage panels to false so stage two can begin
         firstStage.setVisible(false);
         secondStage.setVisible(true);
+
+        // Take the points from stage one and put them to the stage two game
+        stage2.setScore(stage1.getScore());
 
         //change the questions label for stage two
         questionLabel.setText("<html>Find a path to cross the diamond without hitting a face card<br>" +

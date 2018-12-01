@@ -165,31 +165,35 @@ public class GameLogic {
     /******************************************************************
      * The first "level" of the game, checks if the randomly chosen
      * card has the same color as the players choice
-     * @param guess - The player's guess is either true or false
+     * @param path - The player's guess is either true or false
      *****************************************************************/
-    public void redVsBlackScore(boolean guess) {
+    public boolean redVsBlackScore(String path, String guess) {
 
-        // Checks if correct
-        if (guess) {
+        // Checks if correctly guessed black or red
+        if ((deck.blackOrRed(path).equals("black") && guess.equals("black")) ||
+                (deck.blackOrRed(path).equals("red") && guess.equals("red"))) {
             score--;
-            //return ;
+            return true;
         } else {
             score++;
+            return false;
         }
+
+
     }
 
     /******************************************************************
      * The second "level" of the game, checks if the player correctly
      * guessed if the next card is higher or lower than the next card
-     * @param loh - The player input of lower or higher in integer
+     * @param guess - The player input of lower or higher in integer
      *               form in order to match the Deck class
      *****************************************************************/
-    public boolean lowerOrHigherScore(int loh) {
+    public boolean lowerOrHigherScore(String guess) {
 
         //variable to return the decision
         boolean decision;
 
-        if (loh == deck.lowerOrHigher()) {
+        if (guess.equals(deck.lowerOrHigher())) {
             score -= 2;
             //the user's choice is correct
             decision = true;
@@ -204,13 +208,13 @@ public class GameLogic {
     /******************************************************************
      * The third "level" of the game, checks if the player correctly
      * guessed if the next card is in-between the previous two cards
-     * @param ioo - The player input of inside or outside in integer
+     * @param guess - The player input of inside or outside in integer
      *              form in order to match the Deck class
      *****************************************************************/
-    public boolean insideOrOutsideScore(int ioo) {
+    public boolean insideOrOutsideScore(String guess) {
 
         boolean decision;
-        if (ioo == deck.insideOrOutside()) {
+        if (guess.equals(deck.insideOrOutside())) {
             score -= 3;
             decision = true;
         } else {
@@ -226,25 +230,47 @@ public class GameLogic {
      * card has the same suit as the players choice
      * @param guess - The player's guess is either true or false
      *****************************************************************/
-    public void guessSuitScore(boolean guess) {
-        if (guess) {
-            score -= 4;
+    public boolean guessSuitScore(String path, String guess) {
+
+        // Checks if correctly guessed suit card
+        if ((deck.guessSuit(path).equals("spades") && guess.equals("spades")) ||
+                (deck.guessSuit(path).equals("hearts") && guess.equals("hearts")) ||
+                (deck.guessSuit(path).equals("clubs") && guess.equals("clubs")) ||
+                (deck.guessSuit(path).equals("diamonds") && guess.equals("diamonds"))) {
+            score-=4;
+            return true;
         } else {
-            score += 4;
+            score+=4;
+            return false;
         }
     }
 
     /******************************************************************
      * The fifth "level" of the game, checks if the randomly chosen
      * card has the same value as the players choice
-     * @param value - The player input of a card value guess
+     * @param path - The player input of a card value guess
      *****************************************************************/
-    public void guessCardValueScore(int value) {
-        //TODO Change value
-        if (deck.guessCard(value)) {
-            score -= 1;
+    public boolean guessCardValueScore(String path, String guess) {
+
+        // Checks if correctly guessed suit card
+        if ((deck.guessSuit(path).equals("2") && guess.equals("2")) ||
+                (deck.guessCard(path).equals("3") && guess.equals("3")) ||
+                (deck.guessCard(path).equals("4") && guess.equals("4")) ||
+                (deck.guessCard(path).equals("5") && guess.equals("5")) ||
+                (deck.guessCard(path).equals("6") && guess.equals("6")) ||
+                (deck.guessCard(path).equals("7") && guess.equals("7")) ||
+                (deck.guessCard(path).equals("8") && guess.equals("8")) ||
+                (deck.guessCard(path).equals("9") && guess.equals("9")) ||
+                (deck.guessCard(path).equals("10") && guess.equals("10")) ||
+                (deck.guessCard(path).equals("jack") && guess.equals("jack")) ||
+                (deck.guessCard(path).equals("queen") && guess.equals("queen")) ||
+                (deck.guessCard(path).equals("king") && guess.equals("king")) ||
+                (deck.guessCard(path).equals("ace") && guess.equals("ace"))) {
+            score -= 10;
+            return true;
         } else {
-            score += 10;
+            score += 1;
+            return false;
         }
     }
 

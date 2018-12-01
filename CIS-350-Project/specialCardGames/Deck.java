@@ -84,11 +84,11 @@ public class Deck {
         System.out.println(d.getCardFromBack(3));
         System.out.println(d.getCardFromBack(4));
 
-        System.out.println(d.blackOrRed());
+//        System.out.println(d.blackOrRed());
         System.out.println(d.lowerOrHigher());
         System.out.println(d.insideOrOutside());
-        System.out.println(d.guessSuit(2));
-        System.out.println(d.guessCard(7));
+//        System.out.println(d.guessSuit(2));
+//        System.out.println(d.guessCard(7));
         System.out.println(d.checkFaceCard(1));
     }
 
@@ -310,13 +310,31 @@ public class Deck {
      * Checks whether the suit picked is black or red.
      * @return int value of 0 or 1. 0 if black, 1 if red.
      *****************************************************************/
-    public int blackOrRed() {
+    public String blackOrRed(String path) {
 
-        // If the card is a spade or club, it's black, so return 0
-        if (randomSuit == 0 || randomSuit == 2)
-            return 0;
-        else
-            return 1;
+        String cardPath[] = path.split("/");
+
+        String ending = cardPath[cardPath.length - 1];
+
+        String cardValue;
+
+        // Gets the cards value from the path, checks length for 10
+        if (ending.length() == 6) {
+            cardValue = ending.substring(1,2);
+        } else {
+            cardValue = ending.substring(2,3);
+        }
+
+        // Checks if the card value is red or black, if it is change the score
+        if (cardValue.equals("S")) {
+            return "black";
+        } else if (cardValue.equals("H")) {
+            return "red";
+        } else if (cardValue.equals("C")) {
+            return "black";
+        } else {
+            return "red";
+        }
     }
 
     /******************************************************************
@@ -326,24 +344,26 @@ public class Deck {
      * @throws IllegalArgumentException when not enough cards have been
      * picked
      *****************************************************************/
-    public int lowerOrHigher() {
+    public String lowerOrHigher() {
+
+        // Gets the cards to compare
+        int first = getCardFromBack(1);
+        int second = getCardFromBack(2);
 
         // Checks if at least 2 cards have been chosen to compare
         if (chosenCards.size() > 1) {
 
             // If recent card is bigger, return 1
-            if (chosenCards.get(chosenCards.size() - 1) >
-                    (chosenCards.get(chosenCards.size() - 2)))
-                return 1;
+            if (first < second)
+                return "higher";
 
                 // If recent card is smaller, return -1
-            else if (chosenCards.get(chosenCards.size() - 1) <
-                    (chosenCards.get(chosenCards.size() - 2)))
-                return -1;
+            else if (first > second)
+                return "lower";
 
                 // If cards are the same, return 0
             else
-                return 0;
+                return "equal";
         } else
             throw new IllegalArgumentException("Can't compare cards");
 
@@ -356,13 +376,11 @@ public class Deck {
      * or outside
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
-    public int insideOrOutside() {
+    public String insideOrOutside() {
 
         int first = getCardFromBack(1);
         int second = getCardFromBack(2);
         int third = getCardFromBack( 3);
-
-        System.out.println(first + " " + second + " " + third);
 
         // Checks if at least 3 cards have been chosen to compare
         if (chosenCards.size() > 2) {
@@ -370,16 +388,16 @@ public class Deck {
             // checks if recent card's value is inside others
             if ((third > first && third < second) ||
                     third > second && third < first)
-                return -1;
+                return "inside";
 
                 // checks if recent card's value is outside others
             else if ((third > first && third > second) ||
                     (third < first && third < second))
-                return 1;
+                return "outside";
 
                 // if those don't work, recent card equals one of the cards
             else
-                return 0;
+                return "equal";
         } else
             throw new IllegalArgumentException("Can't compare cards");
 
@@ -387,24 +405,35 @@ public class Deck {
 
     /******************************************************************
      * Checks if the user's guess is the same as the card
-     * @param guessSuit - the value of the suit the user guesses
+     * @param path - the value of the suit the user guesses
      * @return true or false whether the user is right or wrong
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
-    public boolean guessSuit(int guessSuit) {
+    public String guessSuit(String path) {
 
-        //TODO: THIS WONT WORK!!!!
+        String cardPath[] = path.split("/");
 
-        // Makes sure there is a card to guess the suit from
-        if (chosenCards.size() >= 1) {
+        String ending = cardPath[cardPath.length - 1];
 
-            // Checks if chosen card's suit is the same as guessSuit
-            if (getRandomSuit() == guessSuit)
-                return true;
-            else
-                return false;
-        } else
-            throw new IllegalArgumentException("Must pick a card");
+        String cardValue;
+
+        // Gets the cards value from the path, checks length for 10
+        if (ending.length() == 6) {
+            cardValue = ending.substring(1,2);
+        } else {
+            cardValue = ending.substring(2,3);
+        }
+
+        // Checks if the card value is red or black, if it is change the score
+        if (cardValue.equals("S")) {
+            return "spades";
+        } else if (cardValue.equals("H")) {
+            return "hearts";
+        } else if (cardValue.equals("C")) {
+            return "clubs";
+        } else {
+            return "diamonds";
+        }
 
     }
 
@@ -412,22 +441,53 @@ public class Deck {
     /******************************************************************
      * Checks if the user's guessed card is the same as what the
      * System chose
-     * @param guessValue - the value that the user chooses
+     * @param path - the value that the user chooses
      * @return true or false whether the user was right or wrong
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
-    public boolean guessCard(int guessValue) {
+    public String guessCard(String path) {
 
-        // Makes sure there is a card to guess the value from
-        if (chosenCards.size() >= 1) {
+        String cardPath[] = path.split("/");
 
-            // Checks if chosen card's suit is the same as guessSuit
-            if (getRandomValue() == guessValue)
-                return true;
-            else
-                return false;
-        } else
-            throw new IllegalArgumentException("Must pick a card");
+        String ending = cardPath[cardPath.length - 1];
+
+        String cardValue;
+
+        // Gets the cards value from the path, checks length for 10
+        if (ending.length() == 6) {
+            cardValue = ending.substring(1,2);
+        } else {
+            cardValue = ending.substring(2,4);
+        }
+
+        // Checks if the card value is a face card, if it is change the score
+        if (cardValue.equals("2")) {
+            return "2";
+        } else if (cardValue.equals("3")) {
+            return "3";
+        } else if (cardValue.equals("4")) {
+            return "4";
+        } else if (cardValue.equals("5")) {
+            return "5";
+        } else if (cardValue.equals("6")) {
+            return "6";
+        } else if (cardValue.equals("7")) {
+            return "7";
+        } else if (cardValue.equals("8")) {
+            return "8";
+        } else if (cardValue.equals("9")) {
+            return "9";
+        } else if (cardValue.equals("10")) {
+            return "10";
+        } else if (cardValue.equals("J")) {
+            return "jack";
+        } else if (cardValue.equals("Q")) {
+            return "queen";
+        } else if (cardValue.equals("K")) {
+            return "king";
+        } else {
+            return "ace";
+        }
 
     }
 
