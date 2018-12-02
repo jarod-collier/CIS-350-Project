@@ -253,7 +253,7 @@ public class GameLogic {
     public boolean guessCardValueScore(String path, String guess) {
 
         // Checks if correctly guessed suit card
-        if ((deck.guessSuit(path).equals("2") && guess.equals("2")) ||
+        if ((deck.guessCard(path).equals("2") && guess.equals("2")) ||
                 (deck.guessCard(path).equals("3") && guess.equals("3")) ||
                 (deck.guessCard(path).equals("4") && guess.equals("4")) ||
                 (deck.guessCard(path).equals("5") && guess.equals("5")) ||
@@ -308,15 +308,5 @@ public class GameLogic {
         } else {
             return false;
         }
-    }
-
-    /******************************************************************
-     * Creates another deck for the second phase of the game
-     *****************************************************************/
-    public void createNewDeck() {
-        deck = new Deck();
-
-        for (int amountOfCards = 0; amountOfCards < 52; amountOfCards++)
-            deck.chooseCard();
     }
 }

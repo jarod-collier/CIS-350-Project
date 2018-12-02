@@ -21,53 +21,34 @@ import java.util.*;
 
 public class Deck {
 
-    /**
-     * 2D array used to hold all card values
-     */
+    /** 2D array used to hold all card values */
     private int[][] deck;
 
-    /**
-     * List of possible card values to be shuffled
-     */
+    /** List of possible card values to be shuffled */
     private ArrayList<Integer> shuffled;
 
-    /**
-     * ArraylIST of card values that have been chosen
-     */
+    /** ArrayList of card values that have been chosen */
     private ArrayList<Integer> chosenCards;
 
-    /**
-     * ArrayList of card suits that have been chosen
-     */
+    /** ArrayList of card suits that have been chosen */
     private ArrayList<Integer> chosenSuits;
-    /**
-     * Random number generator for the suit
-     */
+
+    /** Random number generator for the suit */
     private Random randomSuitGen;
 
-    /**
-     * Random number generator for the value
-     */
+    /** Random number generator for the value */
     private Random randomValueGen;
 
-    /**
-     * int used to keep track of the suit being picked
-     */
+    /** int used to keep track of the suit being picked */
     private int randomSuit;
 
-    /**
-     * int used to keep track of the value being picked
-     */
+    /** int used to keep track of the value being picked */
     private int randomValue;
 
-    /**
-     * final variable used for the number of suits in a deck
-     */
+    /** final variable used for the number of suits in a deck */
     private final int SUITS = 4;
 
-    /**
-     * final variable used for the number of values in a deck
-     */
+    /** final variable used for the number of values in a deck */
     private final int VALUES = 13;
 
     public static void main(String[] args) {
@@ -282,7 +263,6 @@ public class Deck {
     public int chooseCard() {
 
         // Checks if the deck is empty
-        //TODO: this breaks everytime
         if (emptyDeck())
             throw new IllegalArgumentException("Deck is empty");
 
@@ -451,14 +431,18 @@ public class Deck {
 
         String ending = cardPath[cardPath.length - 1];
 
+        System.out.println("ending: "+ ending);
+
         String cardValue;
 
         // Gets the cards value from the path, checks length for 10
         if (ending.length() == 6) {
-            cardValue = ending.substring(1,2);
+            cardValue = ending.substring(0,1);
         } else {
-            cardValue = ending.substring(2,4);
+            cardValue = ending.substring(0,2);
         }
+
+        System.out.println("cardValue: " + cardValue);
 
         // Checks if the card value is a face card, if it is change the score
         if (cardValue.equals("2")) {
