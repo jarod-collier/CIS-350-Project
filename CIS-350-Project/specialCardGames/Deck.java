@@ -320,7 +320,8 @@ public class Deck {
     /******************************************************************
      * Checks whether new card is higher, lower, or equal to the
      * previous card
-     * @return -1, 0, or 1 depending on if lower, equal, or higher
+     * @return -1, 0, or 1 depending on if the card is lower, equal,
+     * or higher than the previous card.
      * @throws IllegalArgumentException when not enough cards have been
      * picked
      *****************************************************************/
@@ -352,8 +353,8 @@ public class Deck {
     /******************************************************************
      * Determines whether the next card is inside, outside, or equal
      * to the previous 2 cards
-     * @return -1, 0, or 1 whether the card is inside, equal,
-     * or outside
+     * @return -1, 0, or 1 depending on if the card is inside, equal,
+     * or outside the previous two cards
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
     public String insideOrOutside() {
@@ -386,7 +387,8 @@ public class Deck {
     /******************************************************************
      * Checks if the user's guess is the same as the card
      * @param path - the value of the suit the user guesses
-     * @return true or false whether the user is right or wrong
+     * @return true or false whether or not the user guessed the
+     * correct suit
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
     public String guessSuit(String path) {
@@ -422,7 +424,8 @@ public class Deck {
      * Checks if the user's guessed card is the same as what the
      * System chose
      * @param path - the value that the user chooses
-     * @return true or false whether the user was right or wrong
+     * @return true or false whether or not the user guessed the
+     * correct value
      * @throws IllegalArgumentException when you can't compare cards
      *****************************************************************/
     public String guessCard(String path) {
@@ -548,6 +551,7 @@ public class Deck {
 
     /******************************************************************
      * Prints the deck
+     * This method is more used as a test for our deck.
      *****************************************************************/
     public void printDeck() {
 

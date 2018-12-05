@@ -2793,7 +2793,8 @@ public class GamePanel extends JPanel implements ActionListener {
      * correctly, if the second card is higher or lower than card one.
      * (First stage, question two)
      *
-     * @param choice which button the user clicked, high, low or equal
+     * @param choice which button the user clicked. They can pick
+     *              high, low or equal
      *****************************************************************/
     private void clickingHighOrLow(Object choice) {
 
