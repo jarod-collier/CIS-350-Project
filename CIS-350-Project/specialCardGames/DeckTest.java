@@ -5,6 +5,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**********************************************************************
+ * @author Jarod Collier, Maz Ashgar, Josh Lowell
+ * @version 12/05/2018
+ *
+ * This class tests as many methods in the DeckTest class as possible
+ *
+ *********************************************************************/
+
 public class DeckTest {
     /******************************************************************
      * This test is meant to test the boundary of the getCardFromBack
@@ -109,5 +117,4 @@ public class DeckTest {
         Deck d = new Deck();
         assertFalse(d.emptyDeck());
     }
-
 }

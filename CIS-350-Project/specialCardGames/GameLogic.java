@@ -3,7 +3,11 @@ package specialCardGames;
 
 /**********************************************************************
  * @author Jarod Collier, Maz Ashgar, Josh Lowell
- * @version 9/28/2018
+ * @version 12/05/2018
+ *
+ * This class is meant to help link the GUI to the Deck class.
+ * It provides methods that call the Deck in order for the GUI to run
+ * and keep score.
  *
  *********************************************************************/
 public class GameLogic {

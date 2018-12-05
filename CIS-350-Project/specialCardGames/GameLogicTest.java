@@ -4,6 +4,14 @@ import org.junit.Before;
 
 import static org.junit.Assert.*;
 
+/**********************************************************************
+ * @author Jarod Collier, Maz Ashgar, Josh Lowell
+ * @version 12/05/2018
+ *
+ * This class tests as many methods in the GameLogic class as possible
+ *
+ *********************************************************************/
+
 public class GameLogicTest {
     /******************************************************************
      * This test is meant to test the getScore method. The test is
@@ -432,5 +440,4 @@ public class GameLogicTest {
                 "CIS-350-Project/specialCardGames/cardImages/" +
                 "big/5D.png"));
     }
-
 }

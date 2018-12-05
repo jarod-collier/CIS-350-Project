@@ -567,5 +567,4 @@ public class Deck {
             }
         }
     }
-
 }
