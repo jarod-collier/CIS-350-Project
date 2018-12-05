@@ -2764,6 +2764,8 @@ public class GamePanel extends JPanel implements ActionListener {
         //make the card visible
         redBlackLabel.setVisible(true);
 
+        System.out.println(redBlackCard.toString());
+
         // Checks if card is red or black and
         // display a message accordingly
         if (stage1.redVsBlackScore(redBlackCard.toString(),

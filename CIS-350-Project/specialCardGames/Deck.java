@@ -154,10 +154,10 @@ public class Deck {
      * greater than or equal to 1
      *****************************************************************/
     public int getCardFromBack(int valueFromBack) {
-        if (valueFromBack > 0 && valueFromBack < chosenCards.size())
+        if (valueFromBack > 0 && valueFromBack <= chosenCards.size())
             return chosenCards.get(chosenCards.size() - valueFromBack);
         else
-            throw new IllegalArgumentException("Must choose value " +
+            throw new IndexOutOfBoundsException("Must choose value " +
                     "within deck size parameters");
     }
 
@@ -171,10 +171,10 @@ public class Deck {
      * greater than or equal to 1
      *****************************************************************/
     public int getSuitFromBack(int suitFromBack) {
-        if (suitFromBack > 0 && suitFromBack < chosenSuits.size())
+        if (suitFromBack > 0 && suitFromBack <= chosenSuits.size())
             return chosenSuits.get(chosenSuits.size() - suitFromBack);
         else
-            throw new IllegalArgumentException("Must choose value " +
+            throw new IndexOutOfBoundsException("Must choose value " +
                     "within deck size parameters");
     }
 
